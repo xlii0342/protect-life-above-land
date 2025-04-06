@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌿 Pawsitive – SDG 15</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2f4f4f;
+      --accent: #3a6659;
+      --highlight: #fcd34d;
+      --font-main: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #f7f9f8;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+    }
+
+    nav a.active {
+      background-color: var(--accent);
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+
+    .hero img {
+      max-width: 100%;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .cta {
+      background: var(--highlight);
+      padding: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-top: 2.5rem;
+    }
+
+    .graph-img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .overlay-content {
+      background: white;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 800px;
+      padding: 30px;
+      position: relative;
+      animation: scaleIn 0.5s ease;
+      text-align: left;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    img.animal-img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    #education-section {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌿 Pawsitive</div>
+    <nav>
+      <a href="Home.html" class="active">Home</a>
+      <a href="Map.html">Map</a>
+      <a href="Learn.html">Learn</a>
+      <a href="Report.html">Report</a>
+      <a href="Support.html">Support</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <img src="https://agriculture.vic.gov.au/__data/assets/image/0009/642429/AndrewCooke-FeralCat.jpeg" alt="Feral Cat"/>
+      <div class="hero-text">
+        <h1>Feral Cats Threaten SDG-15: Life on Land</h1>
+        <p>Feral cats are causing the extinction of Australia's native species. Over 2.6 billion animals are killed annually by cats and foxes. Our mission aligns with SDG 15 to protect biodiversity and ensure healthy ecosystems for future generations.</p>
+      </div>
+    </div>
+
+    <h2>Our Mission: Saving Life Above Land</h2>
+    <div class="grid-2">
+      <div class="card" id="educationCard">
+        <h3>📚 Education & Awareness</h3>
+        <p>Engaging stories, visualizations, and workshops that teach residents about their role in ecosystem protection.</p>
+      </div>
+      <div class="card">
+        <h3>🐱 Responsible Pet Ownership</h3>
+        <p>Educate cat owners on desexing, microchipping, and safe containment to reduce wild roaming.</p>
+      </div>
+    </div>
+
+    <div id="education-section">
+      <h2>Native Species at Risk</h2>
+      <div class="grid-2" id="cardGrid"></div>
+    </div>
+
+    <div class="cta">
+      🐨 Protect Life on Land — Help us stop biodiversity loss in Victoria by taking action today!
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <button class="close-btn" onclick="closeOverlay()">&times;</button>
+      <img src="" alt="Animal Image" class="animal-img" id="overlayImage" />
+      <h2 id="overlayTitle"></h2>
+      <p id="overlayIntro"></p>
+      <h3>About the Animal</h3>
+      <p id="overlayAbout"></p>
+      <h3>Impact of Feral Cats</h3>
+      <p id="overlayImpact"></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Pawsitive – Supporting SDG 15 | Powered by Logic Loop (TA22)
+  </footer>
+
+  <script>
+    function toggleEducation() {
+      const section = document.getElementById('education-section');
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+
+    document.getElementById('educationCard').addEventListener('click', toggleEducation);
+
+    const animals = [
+      { name: 'Brush-tailed Rock-wallaby', image: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Petrogale_penicillata.jpg', intro: 'An agile wallaby found among rocky outcrops and cliffs.', about: 'They live in steep rocky areas and feed on grasses and shrubs. Population decline due to habitat loss and predation.', impact: 'Feral cats prey on young wallabies, worsening their already vulnerable populations.' },
+      { name: 'Eastern Bettong', image: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Eastern_Bettong.jpg', intro: 'A small, nocturnal marsupial once extinct on the mainland.', about: 'Feeds on fungi, roots, and seeds in open forests. Reintroduced in predator-free sanctuaries.', impact: 'Feral cats contributed heavily to their mainland extinction by preying on them.' },
+      { name: 'Spot-tailed Quoll', image: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Dasyurus_maculatus.jpg', intro: 'Australia’s largest carnivorous marsupial.', about: 'Solitary and nocturnal, it preys on mammals, birds, and reptiles in forests.', impact: 'Juveniles are vulnerable to feral cats, and cats compete for similar prey.' },
+      { name: 'Growling Grass Frog', image: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Litoria_raniformis.jpg', intro: 'A large and vibrant green frog found in wetlands.', about: 'Known for its distinctive growling call, it inhabits ponds and swamps.', impact: 'Feral cats prey on frogs, especially during breeding seasons when they are more exposed.' },
+      { name: 'Orange-bellied Parrot', image: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Orange-bellied_Parrot.jpg', intro: 'A critically endangered migratory parrot.', about: 'Breeds in Tasmania and migrates to mainland Australia.', impact: 'Ground foraging makes them easy targets for feral cats.' },
+      { name: 'Southern Bent-wing Bat', image: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Miniopterus_orianae_oceanensis.jpg', intro: 'A critically endangered cave-dwelling bat.', about: 'Relies on caves in south-eastern Australia for roosting.', impact: 'Feral cats hunt bats near cave entrances.' },
+      { name: 'Black-eared Miner', image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Black-eared_Miner.jpg', intro: 'An endangered mallee woodland bird.', about: 'Highly social and lives in small flocks.', impact: 'Ground-foraging exposes them to cat predation.' },
+      { name: 'Malleefowl', image: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Malleefowl.jpg', intro: 'A mound-building bird native to Australia.', about: 'Builds large nesting mounds to incubate eggs.', impact: 'Eggs and chicks are heavily predated by feral cats.' },
+      { name: 'Eastern Barred Bandicoot', image: 'https://upload.wikimedia.org/wikipedia/commons/4/47/Perameles_gunnii.jpg', intro: 'A small, ground-dwelling marsupial.', about: 'Nocturnal insectivore, once extinct on the mainland.', impact: 'Feral cats were a primary driver of their decline.' },
+      { name: 'Desert Mouse', image: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Pseudomys_deserti.jpg', intro: 'A small native rodent of arid Australia.', about: 'Nocturnal and feeds on seeds and insects.', impact: 'Highly vulnerable to feral cats, especially in fragmented habitats.' },
+      { name: 'Western Whipbird (Mallee)', image: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Psophodes_occidentalis.jpg', intro: 'A secretive bird of mallee shrublands.', about: 'Known for their whip-crack call.', impact: 'Ground-foraging behaviour increases risk from feral cats.' },
+      { name: 'Mallee Emu-wren', image: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Stipiturus_mallee.jpg', intro: 'A tiny bird dependent on mallee habitat.', about: 'Inhabits dense spinifex grass in mallee regions.', impact: 'Feral cats prey on these poor flyers, worsening declines.' },
+      { name: "Bolam's Mouse", image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Bolam%27s_Mouse.jpg', intro: 'A native rodent of arid shrublands.', about: 'Feeds on seeds, insects, and green plant material.', impact: 'Small size makes it an easy target for feral cats.' }
+    ];
+
+    const grid = document.getElementById('cardGrid');
+
+    animals.forEach(animal => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<h3>${animal.name}</h3><img src="${animal.image}" alt="${animal.name}" style="width:100%; border-radius:8px; margin-top:10px;">`;
+      card.addEventListener('click', () => openOverlay(animal));
+      grid.appendChild(card);
+    });
+
+    function openOverlay(animal) {
+      document.getElementById('overlayImage').src = animal.image;
+      document.getElementById('overlayTitle').textContent = animal.name;
+      document.getElementById('overlayIntro').textContent = animal.intro;
+      document.getElementById('overlayAbout').textContent = animal.about;
+      document.getElementById('overlayImpact').textContent = animal.impact;
+      document.getElementById('overlay').style.display = 'flex';
+    }
+
+    function closeOverlay() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
