@@ -6,7 +6,7 @@ dj-database-url==2.3.0
 Django==5.1.8
 gunicorn==23.0.0
 idna==3.10
-numpy==2.2.4
+numpy==1.25.2 
 packaging==24.2
 pyarrow==19.0.1
 pylance==0.25.2
