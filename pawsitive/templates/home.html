@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌿 Wildlife Watch – SDG 15</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2f4f4f;
+      --accent: #3a6659;
+      --highlight: #fcd34d;
+      --font-main: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #f7f9f8;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+    }
+
+    nav a.active {
+      background-color: var(--accent);
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+
+    .hero img {
+      max-width: 100%;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .cta {
+      background: var(--highlight);
+      padding: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-top: 2.5rem;
+    }
+
+    .graph-img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌿 Wildlife Watch</div>
+    <nav>
+      <a href="Home.html" class="active">Home</a>
+      <a href="Map.html">Map</a>
+      <a href="Learn.html">Learn</a>
+      <a href="Report.html">Report</a>
+      <a href="Support.html">Support</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <img src="https://agriculture.vic.gov.au/__data/assets/image/0009/642429/AndrewCooke-FeralCat.jpeg" alt="Feral Cat"/>
+      <div class="hero-text">
+        <h1>Feral Cats Threaten SDG-15: Life on Land</h1>
+        <p>Feral cats are causing the extinction of Australia's native species. Over 2.6 billion animals are killed annually by cats and foxes. Our mission aligns with SDG 15 to protect biodiversity and ensure healthy ecosystems for future generations.</p>
+      </div>
+    </div>
+
+    <!-- Mission Epics -->
+    <h2>Our Mission: Saving Life Above Land</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📚 Education & Awareness</h3>
+        <p>Engaging stories, visualizations, and workshops that teach residents about their role in ecosystem protection.</p>
+      </div>
+      <div class="card">
+        <h3>🐱 Responsible Pet Ownership</h3>
+        <p>Educate cat owners on desexing, microchipping, and safe containment to reduce wild roaming.</p>
+      </div>
+    </div>
+
+    <!-- Why It Matters -->
+    <h2>Why It Matters</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🔥 The Ecological Emergency</h3>
+        <p>Feral cats are responsible for massive biodiversity loss. They prey on birds, small mammals, reptiles, and insects—many of which are endangered or vulnerable.</p>
+        <p>This jeopardizes Australia's commitment to SDG-15: halting biodiversity loss and protecting native flora and fauna.</p>
+        <img class="graph-img" src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Endangered','Vulnerable','Least Concern'],datasets:[{data:[30,45,25]}]},options:{title:{display:true,text:'Species Impacted by Feral Cats'}}}" alt="Species Chart"/>
+      </div>
+      <div class="card">
+        <h3>🧬 Impact Beyond Wildlife</h3>
+        <p>
+		Leadbeater's Possum, a critically endangered species in Victoria, faces extinction due to habitat destruction from logging and bushfires. This unique marsupial relies on mature mountain ash forests, which are rapidly disappearing.
+<br>
+<br>
+Feral cats pose a significant threat to Leadbeater's Possum by hunting them and spreading diseases like toxoplasmosis. Urgent action is needed to manage feral cat populations and protect Victoria's biodiversity, ensuring the survival of this precious species.
+		</p>
+        <img class="graph-img" src="https://i0.wp.com/npansw.org.au/wp-content/uploads/2017/04/leadbeaters-possum-photo-emma-campbell.jpg?fit=1200%2C500&ssl=1" alt="Leadbeater's Possum"/>
+        <p style="font-size: 0.9rem;">Leadbeater's Possum: One of Victoria's most threatened species</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      🐨 Protect Life on Land — Help us stop biodiversity loss in Victoria by taking action today!
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Wildlife Watch – Supporting SDG 15 | Powered by Logic Loop (TA22)
+  </footer>
+
+</body>
+</html>
