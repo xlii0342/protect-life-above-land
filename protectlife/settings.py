@@ -13,8 +13,19 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
+from pathlib import Path
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 静态文件的 URL 路径
+STATIC_URL = '/static/'
+
+# 所有静态文件将被收集到这个文件夹中 (用于 Heroku 部署)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +39,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,12 +48,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "whitenoise.runserver_nostatic", 
+
+    "whitenoise.runserver_nostatic",
+
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
     'whitenoise.middleware.WhiteNoiseMiddleware', 
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
