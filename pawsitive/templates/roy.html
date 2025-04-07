@@ -218,13 +218,14 @@
   <header>
     <div class="logo">🌿 Pawsitive</div>
     <nav>
-      <a href="Home.html" class="active">Home</a>
-      <a href="Map.html">Map</a>
-      <a href="Learn.html">Learn</a>
-      <a href="Report.html">Report</a>
-      <a href="Support.html">Support</a>
+      <a href="{% url 'home' %}" class="active">Home</a>
+      <a href="{% url 'map' %}">Map</a>
+      <a href="{% url 'learn' %}">Learn</a>
+      <a href="{% url 'report' %}">Report</a>
+      <a href="{% url 'support' %}">Support</a>
     </nav>
   </header>
+  
 
   <div class="container">
     <div class="hero">
