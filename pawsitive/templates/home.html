@@ -3,224 +3,511 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 Wildlife Watch – SDG 15</title>
+  <title>Pawsitive – Species in Danger</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #2f4f4f;
-      --accent: #3a6659;
-      --highlight: #fcd34d;
-      --font-main: 'Inter', sans-serif;
-    }
-
-    * {
-      margin: 0; padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: var(--font-main);
-      background-color: #f7f9f8;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7f6;
       color: #333;
-      line-height: 1.6;
     }
 
-    header {
-      background-color: var(--primary);
+    /* Header Navigation */
+    .top-nav {
+      background-color: #2f4f4f;
       color: white;
-      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .logo {
-      font-size: 1.7rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: bold;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
     }
 
-    nav {
+    .logo::before {
+      content: "🌿";
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .nav-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
-    nav a {
+    .nav-links a {
       color: white;
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: 0.3s;
       font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
 
-    nav a:hover {
-      background-color: var(--accent);
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
-    nav a.active {
-      background-color: var(--accent);
+    .nav-links .support {
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
-    .container {
-      padding: 2rem;
-    }
-
-    .hero {
+    /* SDG-15 Section */
+    .sdg-section {
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      align-items: center;
-    }
-
-    .hero img {
-      max-width: 100%;
-      width: 400px;
+      padding: 2rem;
+      background: white;
+      max-width: 1200px;
+      margin: 2rem auto;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
-    .hero-text {
+    .sdg-section img {
       flex: 1;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      color: var(--primary);
+    .sdg-text {
+      flex: 2;
+      padding: 1rem 2rem;
+    }
+
+    .sdg-text h2 {
+      color: #2f4f4f;
       margin-bottom: 1rem;
-    }
-
-    h2 {
-      margin-top: 2rem;
-      color: var(--accent);
       font-size: 1.8rem;
-      margin-bottom: 1rem;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    .sdg-text p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .read-more-btn {
+      background-color: #fcd34d;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      background-color: #fbbf24;
+    }
+
+    .sdg-details {
+      display: none;
       margin-top: 1rem;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .sdg-details.show {
+      display: block;
+    }
+
+    /* Endangered Species Grid */
+    .section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      color: #2f4f4f;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
     }
 
     .card {
       background: white;
       border-radius: 10px;
-      padding: 1.2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .cta {
-      background: var(--highlight);
-      padding: 1.2rem;
-      text-align: center;
-      font-weight: bold;
-      border-radius: 10px;
-      margin-top: 2.5rem;
-    }
-
-    .graph-img {
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.3s ease;
       width: 100%;
-      border-radius: 8px;
-      margin-top: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 250px;
     }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card p {
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .actions button {
+      padding: 0.8rem 1.5rem;
+      background: #2f4f4f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .actions button:hover {
+      background: #1e3838;
+    }
+
+    .map-placeholder {
+      margin-top: 3rem;
+      height: 250px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      border-radius: 10px;
+    }
+
+    /* Overlay */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  display: none;
+}
+
+/* Active state */
+.overlay.active {
+  display: flex;
+}
+
+/* Modal Box */
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  max-height: 85vh;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+/* Modal Image */
+.modal img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+
+/* Modal Title */
+.modal h3 {
+  margin-bottom: 0.5rem;
+  color: #2f4f4f;
+}
+
+/* Modal Text */
+.modal p {
+  margin-bottom: 1rem;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: #2f4f4f;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 200;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #1e3838;
+}
+
+
 
     footer {
-      background: var(--primary);
-      color: white;
       text-align: center;
-      padding: 1rem;
+      padding: 2rem;
+      background-color: #2f4f4f;
+      color: white;
       margin-top: 3rem;
     }
 
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-      }
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-link {
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-bottom a {
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">🌿 Wildlife Watch</div>
-    <nav>
+  <!-- Header -->
+  <header class="top-nav">
+    <div class="logo">Pawsitive</div>
+    <nav class="nav-links">
       <a href="Home.html" class="active">Home</a>
-      <a href="Map.html">Map</a>
-      <a href="Learn.html">Learn</a>
-      <a href="Report.html">Report</a>
-      <a href="Support.html">Support</a>
+      <a href="PetOwner.html">Pet Owners</a>
     </nav>
   </header>
 
-  <div class="container">
-
-    <!-- Hero Section -->
-    <div class="hero">
-      <img src="https://agriculture.vic.gov.au/__data/assets/image/0009/642429/AndrewCooke-FeralCat.jpeg" alt="Feral Cat"/>
-      <div class="hero-text">
-        <h1>Feral Cats Threaten SDG-15: Life on Land</h1>
-        <p>Feral cats are causing the extinction of Australia's native species. Over 2.6 billion animals are killed annually by cats and foxes. Our mission aligns with SDG 15 to protect biodiversity and ensure healthy ecosystems for future generations.</p>
+  <!-- SDG-15 Section -->
+  <section class="sdg-section">
+    <img src="https://agriculture.vic.gov.au/__data/assets/image/0009/642429/AndrewCooke-FeralCat.jpeg" alt="Feral Cat">
+    <div class="sdg-text">
+      <h2>Feral Cats are Destroying Biodiversity</h2>
+      <p>Learn about the native species most at risk — and take action to protect them!</p>
+      <p><strong>Support SDG-15: Life on Land</strong></p>
+      <button class="read-more-btn" onclick="toggleSDG()">Click here to read more</button>
+      <div class="sdg-details" id="sdgMore">
+        <p><strong>SDG 15</strong> is about protecting, restoring and promoting sustainable use of terrestrial ecosystems and biodiversity. In Victoria, feral cats kill millions of native animals each year.</p>
+        <p>This includes threatened species like the Malleefowl, Eastern Bettong, and Spot-tailed Quoll — many of which are already on the edge of extinction.</p>
+        <p>You can support SDG-15 by reporting sightings, encouraging responsible pet ownership, and spreading awareness.</p>
       </div>
     </div>
+  </section>
 
-    <!-- Mission Epics -->
-    <h2>Our Mission: Saving Life Above Land</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>📚 Education & Awareness</h3>
-        <p>Engaging stories, visualizations, and workshops that teach residents about their role in ecosystem protection.</p>
-      </div>
-      <div class="card">
-        <h3>🐱 Responsible Pet Ownership</h3>
-        <p>Educate cat owners on desexing, microchipping, and safe containment to reduce wild roaming.</p>
-      </div>
+  <!-- Endangered Species Cards -->
+  <section class="section">
+    <h2>Do You Know These Endangered Species?</h2>
+    <div class="grid" id="cardGrid"></div>
+    <div class="actions">
+      <a href="PetOwner.html"><button>Cat Owner Info</button></a>
     </div>
+    <div class="map-placeholder">🗺 Interactive Map of Victoria – Coming Soon</div>
+  </section>
 
-    <!-- Why It Matters -->
-    <h2>Why It Matters</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>🔥 The Ecological Emergency</h3>
-        <p>Feral cats are responsible for massive biodiversity loss. They prey on birds, small mammals, reptiles, and insects—many of which are endangered or vulnerable.</p>
-        <p>This jeopardizes Australia's commitment to SDG-15: halting biodiversity loss and protecting native flora and fauna.</p>
-        <img class="graph-img" src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Endangered','Vulnerable','Least Concern'],datasets:[{data:[30,45,25]}]},options:{title:{display:true,text:'Species Impacted by Feral Cats'}}}" alt="Species Chart"/>
-      </div>
-      <div class="card">
-        <h3>🧬 Impact Beyond Wildlife</h3>
-        <p>
-		Leadbeater's Possum, a critically endangered species in Victoria, faces extinction due to habitat destruction from logging and bushfires. This unique marsupial relies on mature mountain ash forests, which are rapidly disappearing.
-<br>
-<br>
-Feral cats pose a significant threat to Leadbeater's Possum by hunting them and spreading diseases like toxoplasmosis. Urgent action is needed to manage feral cat populations and protect Victoria's biodiversity, ensuring the survival of this precious species.
-		</p>
-        <img class="graph-img" src="https://i0.wp.com/npansw.org.au/wp-content/uploads/2017/04/leadbeaters-possum-photo-emma-campbell.jpg?fit=1200%2C500&ssl=1" alt="Leadbeater's Possum"/>
-        <p style="font-size: 0.9rem;">Leadbeater's Possum: One of Victoria's most threatened species</p>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta">
-      🐨 Protect Life on Land — Help us stop biodiversity loss in Victoria by taking action today!
+  <!-- Modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <button class="close-btn" onclick="document.getElementById('overlay').classList.remove('active')">X</button>
+      <img id="modalImg" src="" alt="Species">
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+      <strong>Trend:</strong> Declining population over the last decade 📉
+      <p>Source: Environmental Victoria, 2024</p>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
-    &copy; 2025 Wildlife Watch – Supporting SDG 15 | Powered by Logic Loop (TA22)
+    <div class="container">
+      <p>&copy; 2025 pawsitive – Together for Biodiversity | Logic Loop</p>
+    </div>
   </footer>
 
+  <!-- Script -->
+  <script>
+  
+    const species = [
+  {
+    name: "Eastern Bettong",
+    img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bettongia_gaimardi.jpg",
+    description: "Once extinct in Victoria, now reintroduced in protected areas. Highly vulnerable to feral cat predation."
+  },
+  {
+    name: "Spot-tailed Quoll",
+    img: "https://assets.wwf.org.au/image/upload/RSwwfau_16027_RSwwfau_16027",
+    description: "One of Australia's largest carnivorous marsupials. Threatened by feral cat competition and habitat loss."
+  },
+  {
+    name: "Black-eared Miner",
+    img: "https://live-production.wcms.abc-cdn.net.au/c84d05b9098340f279a981825d31b15a?impolicy=wcms_crop_resize&cropH=3127&cropW=4691&xPos=0&yPos=0&width=862&height=575",
+    description: "Endangered woodland bird. Suffers from habitat fragmentation and is at risk from invasive predators."
+  },
+  
+  {
+    name: "Orange-bellied Parrot",
+    img: "https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2021/02/H83TRA-scaled.jpg?fit=2560%2C1707&ssl=1",
+    description: "Critically endangered. Coastal dweller at high risk due to habitat loss and cat predation near urban edges."
+  },
+  {
+    name: "Eastern Barred Bandicoot",
+    img: "https://shop.zoo.org.au/cdn/shop/products/HC6235new.jpg?v=1629947894",
+    description: "Small nocturnal marsupial. Conservation areas use fencing to protect it from cats."
+  },
+  {
+    name: "Brush-tailed Rock-wallaby",
+    img: "https://media.australian.museum/media/dd/images/Some_image.1340303c.fill-600x400.1c7f72a.jpg",
+    description: "Cliff-dwelling wallaby under pressure from habitat loss and predation by foxes and feral cats."
+  },
+  {
+    name: "Bolam's Mouse",
+    img: "https://images.ala.org.au/image/proxyImageThumbnail?imageId=564d580b-6d8f-435f-99d3-f0c74dd1fb50",
+    description: "Small desert mouse highly susceptible to introduced predators including feral cats."
+  },
+  {
+    name: "Desert Mouse",
+    img: "https://www.australianwildlife.org/sites/default/files/media/image/2025-01/Dusky%20Hopping%20Mouse-4.jpg",
+    description: "Native to arid Australia. Faces increased risk from ecosystem imbalance and feral cats."
+  },
+  {
+    name: "Western Whipbird (Mallee)",
+    img: "https://birdlife.org.au/wp-content/uploads/2022/12/Western-Whipbird-immature-Tom-Hunt.jpg",
+    description: "Secretive ground-feeder. Mallee habitat clearance and cat predation are major threats."
+  },
+  {
+    name: "Mallee Emu-wren",
+    img: "https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2024/10/Mallee-Emu-wren_adjusted-scaled-e1730099610660.jpg?fit=1800%2C1259&ssl=1",
+    description: "Tiny endangered bird found only in Mallee. Cat predation, fire, and climate change are threats."
+  }
+  
+];
+
+
+    const grid = document.getElementById("cardGrid");
+    const overlay = document.getElementById("overlay");
+    const modalImg = document.getElementById("modalImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+
+    species.forEach((s) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<img src="${s.img}" alt="${s.name}"><p>${s.name}</p>`;
+      card.onclick = () => {
+        modalImg.src = s.img;
+        modalTitle.textContent = s.name;
+        modalText.textContent = s.description;
+        overlay.classList.add("active");
+      };
+      grid.appendChild(card);
+    });
+
+    function toggleSDG() {
+      document.getElementById('sdgMore').classList.toggle('show');
+    }
+	// Close modal when clicking outside it
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove('active');
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && overlay.classList.contains('active')) {
+    overlay.classList.remove('active');
+  }
+});
+
+  </script>
 </body>
 </html>
