@@ -246,13 +246,14 @@
   <header>
     <div class="logo">🌿 Wildlife Watch</div>
     <nav>
-      <a href="Home.html">Home</a>
-      <a href="Map.html">Map</a>
-      <a href="Learn.html">Learn</a>
-      <a href="Report.html" class="active">Report</a>
-      <a href="Support.html">Support</a>
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'map' %}">Map</a>
+      <a href="{% url 'learn' %}">Learn</a>
+      <a href="{% url 'report' %}" class="active">Report</a>
+      <a href="{% url 'support' %}">Support</a>
     </nav>
-  </header>
+</header>
+
 
   <div class="container">
     <h1>Feral Cat Observation Reporting System</h1>
