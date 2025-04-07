@@ -209,19 +209,21 @@
     }
 
     /* Overlay */
-.overlay {
+  .overlay {
   position: fixed;
-  top: 0; left: 0;
+  top: 0; 
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
   display: flex;
-  align-items: center;
+  align-items: flex-start; 
   justify-content: center;
+  padding-top: 60px; 
   z-index: 100;
-  display: none;
 }
+
 
 /* Active state */
 .overlay.active {
