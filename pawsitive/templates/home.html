@@ -359,14 +359,15 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="top-nav">
-    <div class="logo">Pawsitive</div>
-    <nav class="nav-links">
-      <a href="Home.html" class="active">Home</a>
-      <a href="PetOwner.html">Pet Owners</a>
-    </nav>
-  </header>
+<!-- Header -->
+<header class="top-nav">
+  <div class="logo">Pawsitive</div>
+  <nav class="nav-links">
+    <a href="{% url 'home' %}" class="active">Home</a>
+    <a href="{% url 'petowner' %}">Pet Owners</a>
+  </nav>
+</header>
+
 
   <!-- SDG-15 Section -->
   <section class="sdg-section">
