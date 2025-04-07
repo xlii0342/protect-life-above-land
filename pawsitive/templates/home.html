@@ -339,13 +339,14 @@
   <header class="top-nav">
     <div class="logo">Pawsitive</div>
     <nav class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Map</a>
-      <a href="#">Learn</a>
-      <a href="#">Report</a>
-      <a href="#" class="support">Support</a>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'map' %}">Map</a>
+        <a href="{% url 'learn' %}">Learn</a>
+        <a href="{% url 'report' %}">Report</a>
+        <a href="{% url 'support' %}" class="support">Support</a>
     </nav>
-  </header>
+</header>
+
 
   <!-- SDG-15 Section -->
   <section class="sdg-section">
