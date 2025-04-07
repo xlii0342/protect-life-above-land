@@ -10,14 +10,14 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8faf9;
+      background: #f5f7f6;
       color: #333;
     }
 
     /* Header Navigation */
     .top-nav {
       background-color: #2f4f4f;
-      color: rgb(249, 245, 245);
+      color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -67,7 +67,7 @@
       display: flex;
       flex-wrap: wrap;
       padding: 2rem;
-      background: rgb(255, 255, 255);
+      background: white;
       max-width: 1200px;
       margin: 2rem auto;
       border-radius: 12px;
@@ -80,7 +80,6 @@
       width: 100%;
       border-radius: 10px;
       object-fit: cover;
-      object-position: 80%
     }
 
     .sdg-text {
@@ -218,9 +217,8 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: 60px;
   z-index: 100;
   display: none;
 }
@@ -265,32 +263,6 @@
   margin-bottom: 1rem;
 }
 
-/* Conservation Status Scale */
-.status-scale {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.status-item {
-  border: 1px solid grey;
-  padding: 5px 12px;
-  border-radius: 20px;
-  color: grey;
-  cursor: default;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.status-item.active {
-  background-color: #d62828; /* Red for active status */
-  color: white;
-  border-color: #d62828;
-  font-weight: bold;
-}
-
-
 /* Close Button */
 .close-btn {
   position: absolute;
@@ -320,19 +292,69 @@
       color: white;
       margin-top: 3rem;
     }
-    body {
- 
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #f5f7f6;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
 
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-link {
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-bottom a {
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -341,28 +363,23 @@
   <header class="top-nav">
     <div class="logo">Pawsitive</div>
     <nav class="nav-links">
-        <a href="{% url 'home' %}"class="active">Home</a>
-        <a href="{% url 'map' %}">Map</a>
-        <a href="{% url 'learn' %}">Learn</a>
-        <a href="{% url 'report' %}">Report</a>
-        <a href="{% url 'support' %}">Support</a>
-        
+      <a href="Home.html" class="active">Home</a>
+      <a href="PetOwner.html">Pet Owners</a>
     </nav>
-</header>
-
+  </header>
 
   <!-- SDG-15 Section -->
   <section class="sdg-section">
     <img src="https://agriculture.vic.gov.au/__data/assets/image/0009/642429/AndrewCooke-FeralCat.jpeg" alt="Feral Cat">
     <div class="sdg-text">
       <h2>Feral Cats are Destroying Biodiversity</h2>
-      <p>Feral cats are a major threat to Victoria’s native wildlife, hunting small mammals and birds to the brink of extinction. Habitat loss and predators like feral cats have already pushed some species out of the wild in Victoria. Discover how these threats impact our local biodiversity and find out what you can do to help protect it.</p>
+      <p>Learn about the native species most at risk — and take action to protect them!</p>
       <p><strong>Support SDG-15: Life on Land</strong></p>
       <button class="read-more-btn" onclick="toggleSDG()">Click here to read more</button>
       <div class="sdg-details" id="sdgMore">
-        <p><strong>SDG 15 is about protecting, restoring, and promoting the sustainable use of land and biodiversity. In Victoria, feral cats kill millions of native animals every year</strong></p>
-        <p>Many of these animals are already endangered or close to extinction. Feral cats continue to push native species closer to the edge, threatening Victoria’s unique ecosystems.</p>
-        <p>You can support SDG 15 by reporting sightings of feral cats, promoting responsible pet ownership, and raising awareness about the impact of feral predators.</p>
+        <p><strong>SDG 15</strong> is about protecting, restoring and promoting sustainable use of terrestrial ecosystems and biodiversity. In Victoria, feral cats kill millions of native animals each year.</p>
+        <p>This includes threatened species like the Malleefowl, Eastern Bettong, and Spot-tailed Quoll — many of which are already on the edge of extinction.</p>
+        <p>You can support SDG-15 by reporting sightings, encouraging responsible pet ownership, and spreading awareness.</p>
       </div>
     </div>
   </section>
@@ -372,11 +389,9 @@
     <h2>Do You Know These Endangered Species?</h2>
     <div class="grid" id="cardGrid"></div>
     <div class="actions">
-      <button>Report</button>
-      <a href="PetOwner.html"></a><button>Cat Owner Info</button>
-      <button>Community</button>
+      <a href="PetOwner.html"><button>Cat Owner Info</button></a>
     </div>
-    <div class="map-placeholder">🗺️ Interactive Map of Victoria – Coming Soon</div>
+    <div class="map-placeholder">🗺 Interactive Map of Victoria – Coming Soon</div>
   </section>
 
   <!-- Modal -->
@@ -386,90 +401,73 @@
       <img id="modalImg" src="" alt="Species">
       <h3 id="modalTitle"></h3>
       <p id="modalText"></p>
+      <strong>Trend:</strong> Declining population over the last decade 📉
+      <p>Source: Environmental Victoria, 2024</p>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    &copy; 2025 Pawsitive – Together for Biodiversity | LogicLoop
+    <div class="container">
+      <p>&copy; 2025 pawsitive – Together for Biodiversity | Logic Loop</p>
+    </div>
   </footer>
 
   <!-- Script -->
   <script>
   
     const species = [
-    {
+  {
     name: "Eastern Bettong",
     img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Bettongia_gaimardi.jpg",
-    description: "Bettongs usually weigh around 2 kilograms and have a yellowish-grey coat on top with a white underside. Their tail is about the same length as their head and body combined, which sets them apart from potoroos, whose tails are noticeably shorter.",
-    distribution: "The bettong lives in eastern Tasmania on islands like Maria and Bruny. It once lived on mainland Australia, including Victoria, but disappeared because of feral cats. Bettongs are small, nocturnal animals, making them easy targets for cats, which are skilled night hunters. With few safe places to hide, bettongs in Victoria were hunted to extinction by feral cats.",
-    status: "Extinct"
+    description: "Once extinct in Victoria, now reintroduced in protected areas. Highly vulnerable to feral cat predation."
   },
   {
     name: "Spot-tailed Quoll",
     img: "https://assets.wwf.org.au/image/upload/RSwwfau_16027_RSwwfau_16027",
-    description: "The Spot-tailed Quoll is about the size of a domestic cat, but with shorter legs and a more pointed face. Its fur is a rich red to dark brown, covered with white spots that continue along its tail, making it easy to tell apart from other Australian animals. Males weigh around 3.5 kilograms, while females are about 2 kilograms",
-    distribution: "The Spot-tailed Quoll lives along the Great Dividing Range, from Victoria to Queensland, in forests, woodlands, and rocky areas. In Victoria, it is endangered, with strongholds in East Gippsland and the Upper Snowy River. Feral cats threaten the quoll by hunting young quolls and competing for food, adding to the pressure from habitat loss",
-    status: "Endangered"
+    description: "One of Australia's largest carnivorous marsupials. Threatened by feral cat competition and habitat loss."
   },
   {
     name: "Black-eared Miner",
     img: "https://live-production.wcms.abc-cdn.net.au/c84d05b9098340f279a981825d31b15a?impolicy=wcms_crop_resize&cropH=3127&cropW=4691&xPos=0&yPos=0&width=862&height=575",
-    description: "The Black-eared Miner is a large honeyeater, about 23 to 26 centimetres long, with dark grey feathers above, paler below, and a bold black face mask. It looks like the Yellow-throated Miner but has a darker rump and no pale band on its tail.",
-    distribution: "The Black-eared Miner is found in Victoria’s mallee woodlands, mainly in the Murray-Sunset, Hattah-Kulkyne, and Wyperfeld National Parks. It is listed as critically endangered and feral cats as major threats. Feral cats hunt adult birds and chicks, and as mallee habitats shrink, the birds have fewer safe places to nest and feed.",
-    status: "Critically Endangered"
+    description: "Endangered woodland bird. Suffers from habitat fragmentation and is at risk from invasive predators."
   },
   
   {
     name: "Orange-bellied Parrot",
     img: "https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2021/02/H83TRA-scaled.jpg?fit=2560%2C1707&ssl=1",
-    description: "The Orange-bellied Parrot is slightly larger than a budgerigar, about 23 cm long. Both males and females have greyish-black bills and brown eyes, but males are brighter, with grass-green feathers, bright yellow underparts, and a vivid orange belly patch. Males also have a deep blue band between the eyes and bright blue on the wings, while females are duller with less blue and a smaller orange patch.",
-    distribution: "The critically endangered Orange-bellied Parrot, a small migratory parrot, breeds in Tasmania and migrates to coastal Victoria and South Australia for winter, relying on saltmarsh habitat for survival. Feral cats threaten the species by preying on birds during migration and at nesting sites.",
-    status: "Critically Endangered"
+    description: "Critically endangered. Coastal dweller at high risk due to habitat loss and cat predation near urban edges."
   },
   {
     name: "Eastern Barred Bandicoot",
     img: "https://shop.zoo.org.au/cdn/shop/products/HC6235new.jpg?v=1629947894",
-    description: "The Eastern Barred Bandicoot is a small, rabbit-sized marsupial with soft grey-brown fur and pale bars across its back and rump. It has a pointed snout, large ears, and a short tail. This bandicoot is mostly active at night, using its strong claws to dig for insects and plant roots. During the day, it hides in nests made of grass and leaves to stay safe from predators.",
-    distribution: "Eastern Barred Bandicoots were once widespread across the grasslands and grassy woodlands of western Victoria, extending into south-eastern South Australia. Today, they survive only in small protected areas, as feral cats have heavily preyed on them, making the species highly vulnerable in the wild.",
-    status: "Endangered"
+    description: "Small nocturnal marsupial. Conservation areas use fencing to protect it from cats."
   },
   {
     name: "Brush-tailed Rock-wallaby",
     img: "https://media.australian.museum/media/dd/images/Some_image.1340303c.fill-600x400.1c7f72a.jpg",
-    description: "The Brush-tailed Rock-wallaby has a long, bushy tail that is darker and fluffier at the tip. Its thick brown fur is reddish on the rump and grey on the shoulders, with paler fur on the chest and belly. Some have a white blaze on their chest, along with a white stripe on the cheek and a black line from the forehead to the neck. Highly agile, this wallaby moves easily over rocky ground, using its strong build, flexible tail for balance, and rough-textured feet for grip. Males weigh about 8 kg and females around 6 kg.",
-    distribution: "In Victoria, the Brush-tailed Rock-wallaby survives in only two small, isolated locations, with fewer than 60 animals left in the wild. This agile species lives in rugged, rocky areas, hiding among ridges during the day and feeding on grasses at dusk. Feral cats are a major threat, preying on young wallabies and adding pressure to the already fragile population.",
-    status: "Critically Endangered"
+    description: "Cliff-dwelling wallaby under pressure from habitat loss and predation by foxes and feral cats."
   },
   {
     name: "Bolam's Mouse",
     img: "https://images.ala.org.au/image/proxyImageThumbnail?imageId=564d580b-6d8f-435f-99d3-f0c74dd1fb50",
-    description: "Bolam’s Mouse is a small rodent, weighing between 9 and 21 grams, with a body length of 5 to 8 centimetres and a long, furry tail. Its fur is dull amber-brown to olive-brown on top and white underneath. It has large ears, big eyes, and looks like a House Mouse but with a longer tail, bigger ears, and no musty smell.",
-    distribution: "Bolam’s Mouse used to live in the semi-arid woodlands and shrublands of north-western Victoria. Today, it is considered extinct in Victoria, with populations surviving only in parts of South Australia and Western Australia. Feral cats were a major threat, hunting these small mice and contributing to their disappearance from Victoria.",
-    status: "Extinct"
+    description: "Small desert mouse highly susceptible to introduced predators including feral cats."
   },
   {
     name: "Desert Mouse",
     img: "https://www.australianwildlife.org/sites/default/files/media/image/2025-01/Dusky%20Hopping%20Mouse-4.jpg",
-    description: "The Desert Mouse is a small rodent with bright chestnut-brown fur and dark, spiky guard hairs that give it a rough look. It has a brown, scaly tail that is about the same length as its body. The mouse has big eyes with a pale orange ring around them, and its underparts are greyish-white. Both males and females are similar in size, weighing between 11 and 35 grams.",
-    distribution: "In Victoria, the Desert Mouse once lived in sandy deserts and dry woodland areas of the northwest. It is now extinct in the state, with feral cats contributing to its decline by preying on these small, ground-dwelling rodents. The loss of habitat and predation pressures forced the Desert Mouse to disappear from Victoria’s wild landscapes.",
-    status: "Extinct"
+    description: "Native to arid Australia. Faces increased risk from ecosystem imbalance and feral cats."
   },
   {
     name: "Western Whipbird (Mallee)",
     img: "https://birdlife.org.au/wp-content/uploads/2022/12/Western-Whipbird-immature-Tom-Hunt.jpg",
-    description: "The Mallee Whipbird is a medium-sized bird, about 20–25 cm long, weighing around 47 grams. It has a short crest, a dark grey bill, long grey legs, and a long tail. Its feathers are grey to olive, with a white stripe down each cheek and along the belly, and a black chin and throat. It also has dull red eyes, with a thin grey ring around them.",
-    distribution: "In Victoria, the Mallee Whipbird is critically endangered and found only in small, isolated patches of mallee vegetation in the northwest. It depends on dense shrubland for shelter and nesting. Feral cats are a serious threat, preying on these secretive birds and making it harder for the population to recover in the wild.",
-    status: "Critically Endangered"
+    description: "Secretive ground-feeder. Mallee habitat clearance and cat predation are major threats."
   },
   {
     name: "Mallee Emu-wren",
     img: "https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2024/10/Mallee-Emu-wren_adjusted-scaled-e1730099610660.jpg?fit=1800%2C1259&ssl=1",
-    description: "The Mallee Emu-wren is a tiny bird, about 10–15 cm long, with a very fine, long tail made of wispy feathers that look like emu feathers. Its body is warm brown above and pale underneath, with soft streaking. Males have a bright orange-brown body and a blue throat and eyebrow stripe. Females are plainer, without the blue markings. Despite their small size, they move quickly through dense mallee shrubs.",
-    distribution: "In Victoria, the Mallee Emu-wren is endangered and found only in a few remaining areas of mallee vegetation in the northwest. It depends on dense, spinifex grass for shelter and nesting. Feral cats are a major threat, as they hunt these tiny birds in their ground-level habitat, making it even harder for the species to survive.",
-    status: "Endangered"
-  },
-
+    description: "Tiny endangered bird found only in Mallee. Cat predation, fire, and climate change are threats."
+  }
   
 ];
 
@@ -481,33 +479,17 @@
     const modalText = document.getElementById("modalText");
 
     species.forEach((s) => {
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `<img src="${s.img}" alt="${s.name}"><p>${s.name}</p>`;
-
-  card.onclick = () => {
-  modalImg.src = s.img;
-  modalTitle.textContent = s.name;
-  modalText.innerHTML = `
-    <p>${s.description}</p>
-    <h3>Distribution & Habitat</h3>
-    <p>${s.distribution}</p>
-    <h3>Population Status In Victoria</h3>
-    <div class="status-scale">
-      <span class="status-item ${s.status === 'Vulnerable' ? 'active' : ''}">Vulnerable</span>
-      <span class="status-item ${s.status === 'Endangered' ? 'active' : ''}">Endangered</span>
-      <span class="status-item ${s.status === 'Critically Endangered' ? 'active' : ''}">Critically Endangered</span>
-      <span class="status-item ${s.status === 'Extinct' ? 'active' : ''}">Extinct</span>
-    </div>
-  `;
-  overlay.classList.add("active");
-};
-
-
-  grid.appendChild(card);
-});
-
-
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<img src="${s.img}" alt="${s.name}"><p>${s.name}</p>`;
+      card.onclick = () => {
+        modalImg.src = s.img;
+        modalTitle.textContent = s.name;
+        modalText.textContent = s.description;
+        overlay.classList.add("active");
+      };
+      grid.appendChild(card);
+    });
 
     function toggleSDG() {
       document.getElementById('sdgMore').classList.toggle('show');
