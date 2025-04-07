@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Learning Resources – SDG 15</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2f4f4f;
+      --accent: #3a6659;
+      --highlight: #fcd34d;
+      --font-main: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #f7f9f8;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+    }
+
+    nav a.active {
+      background-color: var(--accent);
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resource-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .resource-content {
+      padding: 1.2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      margin-bottom: 2rem;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .cta {
+      background: var(--highlight);
+      padding: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-top: 2.5rem;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .tabs {
+        flex-wrap: wrap;
+      }
+      .tab {
+        flex-grow: 1;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌿 Wildlife Watch</div>
+    <nav>
+      <a href="Home.html">Home</a>
+      <a href="Map.html">Map</a>
+      <a href="Learn.html" class="active">Learn</a>
+      <a href="Report.html">Report</a>
+      <a href="Support.html">Support</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Learning Resource Center</h1>
+    <p>Explore our carefully curated educational resources to learn how to protect local ecosystems and address the threat of feral cats. Whether you're a student, teacher, or enthusiastic community member, we have content suited for you.</p>
+
+    <div class="tabs">
+      <div class="tab active">Feral Cat Impact</div>
+      <div class="tab">Endangered Species</div>
+      <div class="tab">Educational Resources</div>
+      <div class="tab">Community Projects</div>
+    </div>
+
+    <div class="video-container">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <h2>Understanding the Feral Cat Threat</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🔬 Feral Cat Impact on Biodiversity</h3>
+        <p>Feral cats are one of the most serious threats to Australia's biodiversity. Since European settlers brought domestic cats, they have become an invasive species, killing over 2 billion native animals annually.</p>
+        <p>In Victoria, feral cats have led to numerous native species becoming endangered or extinct, disrupting the balance of local ecosystems. They not only directly prey on small mammals, birds, and reptiles, but also indirectly affect wildlife populations through disease transmission.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Key Data and Research</h3>
+        <p>According to recent research, a single feral cat can kill up to 740 native animals per year. In some areas of Victoria, feral cat density reaches 5-10 cats per square kilometer.</p>
+        <p>Our research team monitors feral cat activity through radio tracking and camera traps, discovering they particularly prefer forest edges and shrubland areas, which are often habitats for many endangered species.</p>
+      </div>
+    </div>
+
+    <h2>Featured Learning Resources</h2>
+    <div class="grid-3">
+      <div class="resource-card">
+        <img src="https://nationalzoo.si.edu/sites/default/files/styles/1400_scale/public/animals/leadbeatersposs-001.jpg" alt="Leadbeater's Possum" class="resource-img">
+        <div class="resource-content">
+          <div>
+            <span class="tag">Endangered Species</span>
+            <span class="tag">Education Guide</span>
+          </div>
+          <h3>Victoria's Treasure: Leadbeater's Possum Protection Guide</h3>
+          <p>This detailed educational package introduces Victoria's iconic endangered species, exploring the impact of feral cat predation on its population and conservation measures.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <img src="https://cdn.shopify.com/s/files/1/0578/3797/2922/files/Trap_Neuter_Release-2_600x600.jpg" alt="Responsible Pet Ownership" class="resource-img">
+        <div class="resource-content">
+          <div>
+            <span class="tag">Pet Owner Guide</span>
+            <span class="tag">Community Action</span>
+          </div>
+          <h3>Responsible Cat Ownership: Protecting Native Wildlife Guide</h3>
+          <p>Learn how to be a responsible cat owner by properly managing, desexing, and limiting your cat's range to reduce the impact on native wildlife.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <img src="https://i.natgeofe.com/k/16592595-c3d8-450e-ad40-b858f947d8d4/nz-glowing-mushroom_4x3.jpg" alt="Ecosystem Balance" class="resource-img">
+        <div class="resource-content">
+          <div>
+            <span class="tag">Ecosystems</span>
+            <span class="tag">Teacher Resources</span>
+          </div>
+          <h3>Food Webs and Biodiversity: Classroom Activity Kit</h3>
+          <p>Interactive lesson plans designed for teachers to help students understand ecosystem balance and how invasive species disrupt native biodiversity.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Community Education Programs</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🎓 School Outreach Program</h3>
+        <p>Our education team regularly visits schools across Victoria, providing interactive lectures and hands-on activities to help students understand the impact of feral cats on ecosystems and how they can participate in conservation efforts.</p>
+        <p>If you're a teacher, you can <a href="#" style="color: var(--accent); font-weight: bold;">apply here</a> for our free school visit program.</p>
+      </div>
+      <div class="card">
+        <h3>👨‍👩‍👧‍👦 Community Workshops</h3>
+        <p>Monthly workshops are held throughout Victoria, sharing best practices for feral cat management and providing practical skills training, such as how to safely install cat fencing and identify feral cat tracks.</p>
+        <p>Check our <a href="#" style="color: var(--accent); font-weight: bold;">event calendar</a> to find a workshop near you.</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      📱 Download our free mobile app for more learning resources and interactive content!
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Wildlife Watch – Supporting SDG 15 | Powered by Logic Loop (TA22)
+  </footer>
+
+</body>
+</html> 
