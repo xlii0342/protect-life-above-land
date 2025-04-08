@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-import os
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +24,11 @@ STATIC_URL = '/static/'
 # 所有静态文件将被收集到这个文件夹中 (用于 Heroku 部署)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
+DATABASES = {
+    'default': dj_database_url.config(default=DATABASE_URL)
+}
 
 
 
