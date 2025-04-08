@@ -233,7 +233,10 @@
         <div class="logo">Pawsitive</div>
         <nav class="nav-links">
             <a href="Home.html">Home</a>
-            <a href="PetOwner.html" class="active">Pet Owners</a>
+            <a href="Map.html">Map</a>
+            <a href="Learn.html">Learn</a>
+            <a href="Report.html">Report</a>
+            <a href="Support.html">Support</a>
         </nav>
     </header>
     
@@ -308,23 +311,62 @@
                 
                 <p>There are several ways to create safe outdoor spaces for your cat that protect wildlife:</p>
                 
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>Commercial Cat Fencing</h3>
-                        <p>Pre-made systems that are easy to install on existing fences.</p>
-                        <p>Price range: $200-$600</p>
-                    </div>
-                    
-                    <div class="card">
+                <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                    <div class="card" style="max-width: 400px; cursor: pointer;" onclick="openDIYModal()">
                         <h3>DIY Cat Fencing</h3>
+                        <div style="margin: 15px 0;">
+                            <img src="https://i.pinimg.com/originals/90/65/7f/90657f208ae0f4f96c98748548d804cd.jpg" alt="DIY Cat Fencing Example" style="width: 100%; border-radius: 6px;">
+                        </div>
                         <p>Homemade systems using netting or roller-top barriers.</p>
                         <p>Price range: $50-$300</p>
+                        <p style="color: var(--accent); margin-top: 10px; text-align: center;"><small>Click for detailed guide</small></p>
                     </div>
-                    
-                    <div class="card">
-                        <h3>Catios (Outdoor Enclosures)</h3>
-                        <p>Secure outdoor enclosures connected to your home.</p>
-                        <p>Price range: $200-$2000+</p>
+                </div>
+
+                <!-- DIY Cat Fencing Modal -->
+                <div id="diyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto;">
+                    <div style="background-color: white; margin: 10% auto; padding: 20px; width: 80%; max-width: 800px; border-radius: 10px; position: relative;">
+                        <span onclick="closeDIYModal()" style="position: absolute; top: 10px; right: 20px; font-size: 24px; cursor: pointer; color: var(--primary);">&times;</span>
+                        <h2 style="color: var(--primary); margin-bottom: 20px;">DIY Cat Fencing Detailed Guide</h2>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="color: var(--accent);">Materials Needed</h3>
+                            <ul class="checklist">
+                                <li>Nylon or metal mesh (at least 1.8m wide)</li>
+                                <li>PVC pipes (around 2cm in diameter, length depends on your fence perimeter)</li>
+                                <li>Cable ties or S-hooks</li>
+                                <li>Scissors and measuring tape</li>
+                                <li>Gloves (to prevent cuts)</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="color: var(--accent);">Step-by-Step Instructions</h3>
+                            <ol style="padding-left: 20px; line-height: 1.8;">
+                                <li><strong>Measure the fence:</strong> Determine the perimeter of the area where you want to install the cat fence.</li>
+                                <li><strong>Prepare the mesh:</strong> Cut the nylon mesh to a width of at least 1.8m and length equal to your fence perimeter plus 30cm for overlap.</li>
+                                <li><strong>Prepare PVC pipes:</strong> Cut the PVC pipes into 60-80cm segments.</li>
+                                <li><strong>Bend the PVC pipes:</strong> Bend the PVC pipes at a 45-degree angle to create the inward-facing barrier.</li>
+                                <li><strong>Install the brackets:</strong> Attach the bent PVC pipes to the top of your existing fence at 1-1.5m intervals.</li>
+                                <li><strong>Install the mesh:</strong> Pull the mesh over the PVC pipe brackets, ensuring it folds inward from the top of the fence.</li>
+                                <li><strong>Secure the mesh:</strong> Use cable ties to secure the mesh to both the fence and PVC pipes.</li>
+                                <li><strong>Inspect:</strong> Check for any holes or loose areas where cats might be able to escape.</li>
+                            </ol>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="color: var(--accent);">Maintenance Tips</h3>
+                            <ul class="checklist">
+                                <li>Regularly check the fence for any damage or loose sections</li>
+                                <li>Pay special attention after strong winds or heavy rain</li>
+                                <li>If using nylon mesh, consider replacing it every 1-2 years as sunlight can degrade the material</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <p style="color: var(--primary); font-weight: bold;">Safety Considerations</p>
+                            <p>Ensure the installation is secure to prevent cats from escaping or getting injured. For particularly active or skilled climbing cats, additional safety measures may be necessary.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -417,7 +459,25 @@
         // Set default active tab
         document.addEventListener("DOMContentLoaded", function() {
             openTab("best-practices");
+            
+            // 添加点击模态框背景关闭功能
+            var modal = document.getElementById("diyModal");
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    closeDIYModal();
+                }
+            }
         });
+
+        function openDIYModal() {
+            document.getElementById("diyModal").style.display = "block";
+            document.body.style.overflow = "hidden"; // 防止背景滚动
+        }
+
+        function closeDIYModal() {
+            document.getElementById("diyModal").style.display = "none";
+            document.body.style.overflow = "auto"; // 恢复滚动
+        }
     </script>
 </body>
 </html>
