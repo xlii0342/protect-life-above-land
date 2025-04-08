@@ -6,10 +6,15 @@ dj-database-url==2.3.0
 Django==5.1.8
 gunicorn==23.0.0
 idna==3.10
+numpy==2.2.4
 packaging==24.2
+psycopg==3.2.6
+pyarrow==19.0.1
+pylance==0.25.2
 requests==2.32.3
+setuptools==78.1.0
 sqlparse==0.5.3
 typing_extensions==4.13.1
 urllib3==2.3.0
+wheel==0.45.1
 whitenoise==6.9.0
-psycopg==3.1.5
