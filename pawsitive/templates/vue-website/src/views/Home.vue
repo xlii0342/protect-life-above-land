@@ -139,27 +139,27 @@ export default {
         distribution: "In Victoria, the Mallee Emu-wren is endangered and found only in a few remaining areas of mallee vegetation in the northwest. It depends on dense, spinifex grass for shelter and nesting. Feral cats are a major threat, as they hunt these tiny birds in their ground-level habitat, making it even harder for the species to survive.",
         status: "Endangered"
       },
-      {
-        name: "Malleefowl",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Malleefowl_0A2A4564.jpg/330px-Malleefowl_0A2A4564.jpg",
-        description: "The Malleefowl is a large ground-dwelling bird, growing up to 60 cm long and weighing around 2.5 kg. Its head and neck are buff-grey, and its body is a mix of brown, black, and white, helping it blend into the environment. With sharp hearing and eyesight, the Malleefowl can sense danger early and usually sneaks away, relying on its camouflage. Though it can fly well, it prefers to run quickly when startled.",
-        distribution: "In Victoria, the Malleefowl is listed as vulnerable and mainly found in the dry mallee woodlands of the northwest. It relies on sandy soils and dense shrubs for nesting and food. Feral cats are a major threat, preying on both adult birds and chicks, making it harder for the species to survive in the wild.",
-        status: "Vulnerable"
-      },
-      {
-        name: "Growling Grass Frog",
-        img: "https://gtsag.org.au/wp-content/uploads/2024/05/Growling-Grass-Frog-by-Dave-Newman.jpg",
-        description: "The Growling Grass Frog, also called the Southern Bell Frog, is one of Australia's largest frogs, growing up to 10 cm long. They live in south-eastern Australia, often found in and around swamps and wetlands. At night, they move between wet areas in search of food. These frogs are patient predators, feeding on insects, small lizards, fish, tadpoles, and even other frogs.",
-        distribution: "In Victoria, the Growling Grass Frog is listed as vulnerable and lives in wetlands, swamps, and lagoons across the state. These frogs need healthy, connected wetlands to move between, especially during rainy nights. Feral cats are a major threat, preying on young frogs and adding pressure to their shrinking populations.",
-        status: "Vulnerable"
-      },
-      {
-        name: "Southern Bent-wing Bat",
-        img: "https://live-production.wcms.abc-cdn.net.au/b6d2cd28ecd904fde491608e70c82a39?impolicy=wcms_crop_resize&cropH=1212&cropW=2154&xPos=0&yPos=98&width=862&height=485",
-        description: "The Southern Bent-wing Bat is an insect-eating, cave-dwelling bat with dark reddish-brown to dark brown fur. Its belly is slightly lighter, and it has a short, rounded face with a domed head. The bat's ears are short and triangular, and its long, curved wing bones give it a distinctive bent-wing shape.",
-        distribution: "In Victoria, the Southern Bent-wing Bat is critically endangered and survives only in a few limestone caves in the southwest. These bats depend on safe, undisturbed caves to roost and raise their young. Feral cats are a major threat, hunting bats as they enter and leave their roosts, putting extra pressure on this small population.",
-        status: "Critically Endangered"
-      }
+      // {
+      //   name: "Malleefowl",
+      //   img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Malleefowl_0A2A4564.jpg/330px-Malleefowl_0A2A4564.jpg",
+      //   description: "The Malleefowl is a large ground-dwelling bird, growing up to 60 cm long and weighing around 2.5 kg. Its head and neck are buff-grey, and its body is a mix of brown, black, and white, helping it blend into the environment. With sharp hearing and eyesight, the Malleefowl can sense danger early and usually sneaks away, relying on its camouflage. Though it can fly well, it prefers to run quickly when startled.",
+      //   distribution: "In Victoria, the Malleefowl is listed as vulnerable and mainly found in the dry mallee woodlands of the northwest. It relies on sandy soils and dense shrubs for nesting and food. Feral cats are a major threat, preying on both adult birds and chicks, making it harder for the species to survive in the wild.",
+      //   status: "Vulnerable"
+      // },
+      // {
+      //   name: "Growling Grass Frog",
+      //   img: "https://gtsag.org.au/wp-content/uploads/2024/05/Growling-Grass-Frog-by-Dave-Newman.jpg",
+      //   description: "The Growling Grass Frog, also called the Southern Bell Frog, is one of Australia's largest frogs, growing up to 10 cm long. They live in south-eastern Australia, often found in and around swamps and wetlands. At night, they move between wet areas in search of food. These frogs are patient predators, feeding on insects, small lizards, fish, tadpoles, and even other frogs.",
+      //   distribution: "In Victoria, the Growling Grass Frog is listed as vulnerable and lives in wetlands, swamps, and lagoons across the state. These frogs need healthy, connected wetlands to move between, especially during rainy nights. Feral cats are a major threat, preying on young frogs and adding pressure to their shrinking populations.",
+      //   status: "Vulnerable"
+      // },
+      // {
+      //   name: "Southern Bent-wing Bat",
+      //   img: "https://live-production.wcms.abc-cdn.net.au/b6d2cd28ecd904fde491608e70c82a39?impolicy=wcms_crop_resize&cropH=1212&cropW=2154&xPos=0&yPos=98&width=862&height=485",
+      //   description: "The Southern Bent-wing Bat is an insect-eating, cave-dwelling bat with dark reddish-brown to dark brown fur. Its belly is slightly lighter, and it has a short, rounded face with a domed head. The bat's ears are short and triangular, and its long, curved wing bones give it a distinctive bent-wing shape.",
+      //   distribution: "In Victoria, the Southern Bent-wing Bat is critically endangered and survives only in a few limestone caves in the southwest. These bats depend on safe, undisturbed caves to roost and raise their young. Feral cats are a major threat, hunting bats as they enter and leave their roosts, putting extra pressure on this small population.",
+      //   status: "Critically Endangered"
+      // }
     ]
 
     const toggleSDG = () => {
@@ -201,12 +201,13 @@ export default {
 }
 
 .sdg-section img {
-  flex: 1;
-  max-width: 400px;
-  width: 100%;
-  border-radius: 10px;
-  object-fit: cover;
-}
+      flex: 1;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position:75%
+    }
 
 .sdg-text {
   flex: 2;
