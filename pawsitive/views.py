@@ -3,12 +3,7 @@ from .models import Species
 import json
 
 def home(request):
-    species_list = Species.objects.all()
-    species_json = list(species_list.values('name_common', 'name_scientific', 'status', 'species_subgroup'))
-    return render(request, 'home.html', {
-        'species_list': species_list,
-        'species_json': json.dumps(species_json),
-    })
+    return render(request, 'home.html')
 
 def petowner(request):
     return render(request, 'PetOwner.html')
