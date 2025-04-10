@@ -384,11 +384,6 @@
     <div class="map-placeholder">🗺️ Interactive Map of Victoria – Coming Soon</div>
   </section>
 
-  <!-- Visualization Section -->
-  <section class="section">
-    <h2>Explore Threatened Species</h2>
-    <canvas id="barCanvas"></canvas>
-  </section>
 
   <!-- Modal -->
   <div class="overlay" id="overlay">
@@ -536,48 +531,6 @@ document.addEventListener('keydown', (e) => {
     overlay.classList.remove('active');
   }
 });
-
-    const speciesData = {{ species_json|safe }};
-    const ctx = document.getElementById('barCanvas').getContext('2d');
-    const subgroups = [...new Set(speciesData.map(d => d.species_subgroup))];
-    const statuses = [...new Set(speciesData.map(d => d.status))];
-    const datasets = statuses.map(status => ({
-      label: status,
-      data: subgroups.map(subgroup => speciesData.filter(d => d.species_subgroup === subgroup && d.status === status).length),
-      backgroundColor: status === 'Critically Endangered' ? '#d62828' :
-                       status === 'Endangered' ? '#f77f00' :
-                       status === 'Vulnerable' ? '#fcbf49' : '#6c757d'
-    }));
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: subgroups,
-        datasets: datasets
-      },
-      options: {
-        plugins: {
-          title: { display: true, text: 'Subgroup vs. Category of Threat' },
-          legend: { position: 'bottom' }
-        },
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true, ticks: { precision: 0 } }
-        }
-      }
-    });
-
-    function showModal(commonName, scientificName, status, subgroup) {
-      const overlay = document.getElementById('overlay');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalText = document.getElementById('modalText');
-
-      modalTitle.textContent = commonName;
-      modalText.innerHTML = `<strong>Scientific Name:</strong> ${scientificName}<br>
-                             <strong>Status:</strong> ${status}<br>
-                             <strong>Subgroup:</strong> ${subgroup}`;
-      overlay.classList.add('active');
-    }
 
   </script>
 </body>
