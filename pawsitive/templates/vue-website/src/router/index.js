@@ -13,7 +13,8 @@ const routes = [
     name: 'PetOwner',
     component: PetOwner
   },
- 
+  // 暂时注释掉缺失的模块
+  /*
   {
     path: '/map',
     name: 'Map',
@@ -34,7 +35,7 @@ const routes = [
     name: 'Support',
     component: () => import('../views/Support.vue')
   }
-  
+  */
 ]
 
 const router = createRouter({
