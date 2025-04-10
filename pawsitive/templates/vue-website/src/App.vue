@@ -4,10 +4,10 @@
       <div class="logo">Pawsitive</div>
       <div class="nav-links">
         <router-link to="/">Home</router-link>
-        <router-link to="/map">Map</router-link>
+        <!-- <router-link to="/map">Map</router-link>
         <router-link to="/learn">Learn</router-link>
         <router-link to="/report">Report</router-link>
-        <router-link to="/support">Support</router-link>
+        <router-link to="/support">Support</router-link> -->
       </div>
     </nav>
     <router-view/>
