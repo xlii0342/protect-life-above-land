@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from .models import Species
-import json
 
 def home(request):
     return render(request, 'home.html')
@@ -9,7 +7,7 @@ def petowner(request):
     return render(request, 'PetOwner.html')
 
 def roy(request):
-    return render(request, 'roy.html')
+    return render(request, 'roy.html') 
 
 def learn(request):
     return render(request, 'learn.html')
