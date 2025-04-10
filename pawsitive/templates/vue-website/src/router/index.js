@@ -14,28 +14,28 @@ const routes = [
     component: PetOwner
   },
   // 暂时注释掉缺失的模块
-  /*
-  {
-    path: '/map',
-    name: 'Map',
-    component: () => import('../views/Map.vue')
-  },
+  
+  // {
+  //   path: '/map',
+  //   name: 'Map',
+  //   component: () => import('../views/Map.vue')
+  // },
   {
     path: '/learn',
     name: 'Learn',
     component: () => import('../views/Learn.vue')
   },
-  {
-    path: '/report',
-    name: 'Report',
-    component: () => import('../views/Report.vue')
-  },
-  {
-    path: '/support',
-    name: 'Support',
-    component: () => import('../views/Support.vue')
-  }
-  */
+  // {
+  //   path: '/report',
+  //   name: 'Report',
+  //   component: () => import('../views/Report.vue')
+  // },
+  // {
+  //   path: '/support',
+  //   name: 'Support',
+  //   component: () => import('../views/Support.vue')
+  // }
+  
 ]
 
 const router = createRouter({
