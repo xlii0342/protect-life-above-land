@@ -14,7 +14,7 @@
       ></iframe>
       
       <div class="content-overlay with-youtube">
-        <h1>Welcome to Pawsitive</h1>
+        <h1></h1>
         <p>Learn about Australian wildlife conservation and endangered species, and explore ways for humans and nature to coexist harmoniously</p>
         
         <button class="start-exploring" @click="navigateTo('/home')">Explore Conservation</button>
