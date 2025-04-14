@@ -42,13 +42,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-<<<<<<< HEAD
             BASE_DIR / 'templates',               # 自定义 Django 模板目录
             BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',              # 前端打包输出的 index.html
-=======
-            BASE_DIR / 'frontend' / 'dist',  # Vue.js 构建输出目录
-            BASE_DIR / 'templates',  # Django 模板目录
->>>>>>> 691d053 (Comment out Twilio import temporarily)
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -93,12 +88,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-<<<<<<< HEAD
     # 指向前端打包输出目录
     BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',
-=======
-    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
->>>>>>> 691d053 (Comment out Twilio import temporarily)
 ]
 
 # WhiteNoise 压缩与缓存管理
