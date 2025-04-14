@@ -22,9 +22,20 @@
 #     return render(request, 'support.html')
 
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 import os
 
 def vue_app(request):
     vue_index_path = os.path.join(os.path.dirname(__file__), 'vue_static', 'index.html')
     with open(vue_index_path, encoding='utf-8') as f:
         return HttpResponse(f.read())
+
+def submit_form(request):
+    return HttpResponse("Form submitted successfully!")
+
+def get_data(request):
+    data = {
+        "message": "This is data from get_data view!"
+    }
+    return JsonResponse(data)
