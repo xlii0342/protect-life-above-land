@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -10,28 +10,33 @@ urlpatterns = [
     # path('api/pets/', include('pawsitive.urls'))
 ]
 
-# 使用 WhiteNoise 来处理静态文件，无需手动调用 django.views.static.serve
-# collectstatic 后，静态文件都在 STATIC_ROOT（staticfiles）里
-
-# 1) 为 debug 模式下提供静态文件访问（Heroku 上由 WhiteNoise 管理）
+# 1) Debug 模式下提供静态文件访问
 if settings.DEBUG:
     urlpatterns += static(
         settings.STATIC_URL,
         document_root=settings.STATICFILES_DIRS[0]
     )
 
-# 2) favicon.ico 单独路由（可选）
+# 2) favicon.ico 单独处理（可选）
 urlpatterns += [
     re_path(r'^favicon\.ico$',
-        TemplateView.as_view(template_name='vue_static/favicon.ico'),
+        serve,
+        {
+            'document_root': settings.STATICFILES_DIRS[0],
+            'path': 'favicon.ico'
+        },
         name='favicon'
     ),
 ]
 
-# 3) 通配所有非 /static/ 及非 /admin/ 的请求，返回前端 SPA 的入口 index.html
+# 3) 匹配所有非 static/admin 的路径，返回 index.html，支持前端 Vue Router 刷新
 urlpatterns += [
     re_path(r'^(?!static/|admin/).*$',
-        TemplateView.as_view(template_name='vue_static/index.html'),
+        serve,
+        {
+            'document_root': settings.STATICFILES_DIRS[0],
+            'path': 'index.html'
+        },
         name='spa-entry'
     ),
 ]
