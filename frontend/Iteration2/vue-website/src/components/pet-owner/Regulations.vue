@@ -33,28 +33,28 @@
       </div>
     </div>
     
+    <!-- 查找区域说明及按钮 -->
     <div style="background-color: #f5f5f5; padding: 1rem; border-radius: 8px; margin-top: 2rem; border-left: 4px solid var(--primary);">
       <h3>Find Regulations for Your Area</h3>
-      <p>Cat management regulations may vary between municipalities. Contact your local council to learn about specific regulations for your area.</p>
-      <!-- 用按钮替换原来的链接 -->
+      <p>Cat management regulations may vary between municipalities. Click the button below to display the map and search bar.</p>
       <button @click="getCouncilInfo" class="btn" style="margin-top: 1rem;">Find My Local Council</button>
     </div>
     
-    <!-- 如果需要显示地图，则在下面显示一个地图容器 -->
-    <!-- 地图显示容器：v-show 而不是 v-if -->
-    <div v-show="showMap" style="margin-top: 1rem;">
+    <!-- 显示地图和搜索栏（仅当 showMap 为 true 时显示） -->
+    <div v-if="showMap" style="margin-top: 1rem;">
+      <!-- 搜索栏（在地图上方） -->
+      <div style="margin-bottom: 1rem;">
+        <input type="text" v-model="searchQuery" placeholder="Enter location or council..." style="padding: 0.5rem; width: 70%;" />
+        <button @click="searchCouncil" class="btn" style="padding: 0.5rem 1rem;">Search</button>
+      </div>
+      <!-- 地图容器 -->
       <div id="map" style="height: 400px; border-radius: 8px;"></div>
     </div>
-
-
     
-    <!-- 显示获取到的 Council 信息 -->
+    <!-- 显示搜索到的 Council 信息 -->
     <div v-if="councilName" style="margin-top: 1rem;">
       <p>📍 Your Local Council is: <strong>{{ councilName }}</strong></p>
     </div>
-    
-    <!-- 以下部分保持原有内容 -->
-    
     
     <div style="margin-top: 3rem;">
       <h2>Questions?</h2>
@@ -72,36 +72,38 @@ import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
 import { fromLonLat } from 'ol/proj'
-import Geocoder from 'ol-geocoder'
 
 export default {
   name: 'Regulations',
   data() {
     return {
-      showMap: false,      // 控制地图容器是否显示
-      map: null,           // 保存 OpenLayers 地图实例
-      councilName: ''      // 存储获取到的 Council 名称
+      showMap: false,      // 控制地图容器和搜索栏是否显示
+      map: null,           // 存储 OpenLayers 地图实例
+      councilName: '',     // 存储获取到的 Council 信息
+      searchQuery: ''      // 搜索栏输入的内容
     }
   },
   methods: {
+    // 点击 "Find My Local Council" 按钮时调用：显示地图和预定位
     getCouncilInfo() {
       if (!navigator.geolocation) {
         alert("Geolocation is not supported by your browser.");
         return;
       }
-
       navigator.geolocation.getCurrentPosition(
         position => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           const centerCoordinate = fromLonLat([longitude, latitude]);
-
+          
+          // 显示地图和搜索栏
           this.showMap = true;
-          console.log("✅ showMap is true, should render #map");
+          console.log("✅ showMap is set to true");
 
+          // 延迟初始化地图，确保 DOM 已渲染
           this.$nextTick(() => {
             if (!this.map) {
-              console.log("✅ DOM updated, initializing map...");
+              console.log("✅ Initializing map...");
               this.map = new Map({
                 target: 'map',
                 layers: [
@@ -113,60 +115,89 @@ export default {
                   center: centerCoordinate,
                   zoom: 13
                 })
-              })
-
-              // 添加 ol-geocoder 搜索控件
-              const geocoder = new Geocoder('nominatim', {
-                provider: 'osm',
-                lang: 'en-US',
-                placeholder: 'Search for a location...',
-                limit: 5,
-                debug: false,
-                autoComplete: true,
-                autoCompleteMinLength: 2,
-                keepOpen: false
-              })
-              this.map.addControl(geocoder)
-
-              // 地址选择回调
-              geocoder.on('addresschosen', evt => {
-                this.map.getView().setCenter(evt.coordinate)
-                this.map.getView().setZoom(14)
-              })
+              });
             } else {
-              this.map.getView().setCenter(centerCoordinate)
+              this.map.getView().setCenter(centerCoordinate);
             }
-          })
+          });
 
-          // 调用 Nominatim API 获取地理信息
-          const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
+          // 可选：同时可调用反向地理编码获取当前位置信息
+          const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`;
           fetch(url)
             .then(response => response.json())
             .then(data => {
               if (data.address) {
-                const council = data.address.municipality || data.address.county || data.address.state_district || 'Not found'
-                this.councilName = council
+                const council = data.address.municipality || data.address.county || data.address.state_district || 'Not found';
+                this.councilName = council;
               } else {
-                this.councilName = 'Not found'
+                this.councilName = 'Not found';
               }
             })
             .catch(error => {
-              console.error('Error fetching Nominatim data:', error)
-              alert("Failed to retrieve council information.")
-            })
+              console.error('Error fetching Nominatim data:', error);
+              alert("Failed to retrieve council information.");
+            });
         },
         error => {
-          alert("Error getting geolocation: " + error.message)
+          alert("Error getting geolocation: " + error.message);
         }
       )
+    },
+    // 点击搜索按钮时调用：基于输入查询定位并更新地图及显示相关信息
+    searchCouncil() {
+      if (!this.searchQuery) {
+        alert("Please enter a location or council name.");
+        return;
+      }
+      const query = encodeURIComponent(this.searchQuery);
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${query}&addressdetails=1&limit=1`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            const result = data[0];
+            // 更新 councilName 显示搜索结果
+            if (result.address) {
+              const council = result.address.municipality || result.address.county || result.address.state_district || 'Not found';
+              this.councilName = council;
+            } else {
+              this.councilName = 'Not found';
+            }
+            // 根据搜索结果更新地图中心
+            const lon = parseFloat(result.lon);
+            const lat = parseFloat(result.lat);
+            const centerCoordinate = fromLonLat([lon, lat]);
+            this.$nextTick(() => {
+              if (!this.map) {
+                this.map = new Map({
+                  target: 'map',
+                  layers: [
+                    new TileLayer({
+                      source: new OSM()
+                    })
+                  ],
+                  view: new View({
+                    center: centerCoordinate,
+                    zoom: 13
+                  })
+                });
+              } else {
+                this.map.getView().setCenter(centerCoordinate);
+              }
+            });
+          } else {
+            alert("No results found for the entered location.");
+          }
+        })
+        .catch(error => {
+          console.error("Error during search:", error);
+          alert("Failed to search for the location.");
+        });
     }
   }
 }
 </script>
-
-
-
-
 
 <style scoped>
 :root {
@@ -197,7 +228,6 @@ export default {
   border-radius: 10px;
   padding: 1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -206,7 +236,6 @@ export default {
   color: var(--primary);
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
-  text-align: left;
 }
 
 .card p {
@@ -249,8 +278,6 @@ export default {
 
 .btn:hover {
   background-color: #1a3a32;
-  color: white !important;
-  text-decoration: none;
 }
 
 @media (max-width: 768px) {
