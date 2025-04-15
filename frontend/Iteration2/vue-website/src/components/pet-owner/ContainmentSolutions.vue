@@ -12,7 +12,7 @@
         </div>
         <p v-if="!expandedCards.diy">Build your own outdoor enclosure using mesh panels or netting to create a safe space for your cat.</p>
         <p v-else>Build your own outdoor enclosure using mesh panels or netting to create a safe space for your cat. These setups are perfect for backyards and can be customised to fit any size area.</p>
-        <div class="button-container">
+        <div class="button-container column">
           <button class="read-more-btn" @click.stop="toggleCard('diy')">
             {{ expandedCards.diy ? 'Read Less' : 'Read More' }}
           </button>
@@ -202,9 +202,22 @@ export default {
   transform: scale(1.05);
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+}
+
+.button-container.column {
+  flex-direction: column;
+  align-items: center;
+}
+
 .click-hint {
   color: var(--accent);
-  margin-top: auto;
+  margin-top: 8px;
   text-align: center;
   font-size: 0.9em;
   font-style: italic;
@@ -275,7 +288,7 @@ export default {
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.3s ease;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .read-more-btn:hover {
@@ -297,13 +310,6 @@ export default {
 .center-btn {
   text-align: center;
   margin: 2rem 0 1rem;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
 }
 
 @media (max-width: 768px) {

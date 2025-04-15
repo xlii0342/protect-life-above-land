@@ -48,10 +48,12 @@ export default {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
   display: none;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 100;
+  z-index: 1000;
   transition: all 0.3s ease;
+  padding-top: 80px;
+  overflow-y: auto;
 }
 
 .overlay.active {
@@ -79,6 +81,7 @@ export default {
   max-height: 85vh;
   overflow-y: auto;
   animation: modalSlideUp 0.4s ease;
+  margin-bottom: 80px;
 }
 
 @keyframes modalSlideUp {

@@ -16,6 +16,19 @@
           @show-species-details="showSpeciesDetails"
         />
 
+        <div class="chart-section-container">
+          <button class="explore-button" @click="toggleChartVisibility">
+            {{ showChart ? 'Hide Threatened Species Data' : 'Explore Threatened Species Data' }}
+          </button>
+          
+          <transition name="fade">
+            <div v-if="showChart" class="visualization-section">
+              <h2>Explore Threatened Species</h2>
+              <ThreatenedSpeciesChart :speciesData="speciesData" />
+            </div>
+          </transition>
+        </div>
+
         <ActionSection />
       </section>
 
@@ -37,6 +50,7 @@ import ExtinctSpecies from '@/components/home/ExtinctSpecies.vue'
 import EndangeredCategory from '@/components/home/EndangeredCategory.vue'
 import SpeciesModal from '@/components/home/SpeciesModal.vue'
 import ActionSection from '@/components/home/ActionSection.vue'
+import ThreatenedSpeciesChart from '@/components/home/ThreatenedSpeciesChart.vue'
 
 export default {
   name: 'HomeView',
@@ -46,16 +60,34 @@ export default {
     ExtinctSpecies,
     EndangeredCategory,
     SpeciesModal,
-    ActionSection
+    ActionSection,
+    ThreatenedSpeciesChart
   },
   setup() {
     const store = useStore()
     const selectedSpecies = ref(null)
     const youtubeVideoId = 'WnWm-zy5qKE'
+    const showChart = ref(false)
+
+    const toggleChartVisibility = () => {
+      showChart.value = !showChart.value
+    }
 
     const youtubeEmbedUrl = computed(() => {
       return `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3`
     })
+
+    const speciesData = [
+      { species_subgroup: 'Mammals', status: 'Critically Endangered', count: 2 },
+      { species_subgroup: 'Mammals', status: 'Endangered', count: 2 },
+      { species_subgroup: 'Mammals', status: 'Vulnerable', count: 0 },
+      { species_subgroup: 'Birds', status: 'Critically Endangered', count: 3 },
+      { species_subgroup: 'Birds', status: 'Endangered', count: 1 },
+      { species_subgroup: 'Birds', status: 'Vulnerable', count: 1 },
+      { species_subgroup: 'Amphibians', status: 'Critically Endangered', count: 0 },
+      { species_subgroup: 'Amphibians', status: 'Endangered', count: 0 },
+      { species_subgroup: 'Amphibians', status: 'Vulnerable', count: 1 }
+    ]
 
     const speciesList = [
       {
@@ -102,7 +134,7 @@ export default {
       },
       {
         name: "Bolam's Mouse",
-        img: "https://images.ala.org.au/image/proxyImageThumbnail?imageId=564d580b-6d8f-435f-99d3-f0c74dd1fb50",
+        img: "https://www.bushheritage.org.au/cdn-cgi/image/quality=90,format=auto,width=800,gravity=0.5x0.5,fit=scale-down/https://www.bushheritage.org.au/uploads/main/Images/News/2020/Scats-used-to-find-what/The-Desert-short-tailed-mouse-is-known-to-live-on-Bon-Bon-Station-Reserve-its-remains-having-recently-been-discovered-in-fox-scats.jpg",
         description: "Bolam's Mouse is a small rodent, weighing between 9 and 21 grams, with a body length of 5 to 8 centimetres and a long, furry tail. Its fur is dull amber-brown to olive-brown on top and white underneath. It has large ears, big eyes, and looks like a House Mouse but with a longer tail, bigger ears, and no musty smell.",
         distribution: "Bolam's Mouse used to live in the semi-arid woodlands and shrublands of north-western Victoria. Today, it is considered extinct in Victoria, with populations surviving only in parts of South Australia and Western Australia. Feral cats were a major threat, hunting these small mice and contributing to their disappearance from Victoria.",
         status: "Extinct"
@@ -191,7 +223,10 @@ export default {
       showSpeciesDetails,
       closeModal,
       youtubeVideoId,
-      youtubeEmbedUrl
+      youtubeEmbedUrl,
+      speciesData,
+      showChart,
+      toggleChartVisibility
     }
   }
 }
@@ -220,11 +255,100 @@ main {
   margin: 0 auto 3rem;
   max-width: 1200px;
   padding: 0;
+  position: relative;
+}
+
+/* 确保各子部分之间有足够间距 */
+.section > * {
+  margin-bottom: 2rem;
+}
+
+.section > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Visualization section styles */
+.visualization-section {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  margin: 0 0 60px 0;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 550px;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+.visualization-section h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-size: 1.8rem;
+}
+
+.visualization-section::after {
+  content: '';
+  display: block;
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  bottom: -30px;
 }
 
 @media (max-width: 992px) {
   .section {
     padding: 0;
   }
+  
+  .visualization-section {
+    padding: 15px;
+    margin: 30px 0 100px 0;
+  }
+}
+
+.chart-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.explore-button {
+  background-color: #3a6659;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.explore-button:hover {
+  background-color: #2c4f46;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.explore-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style> 

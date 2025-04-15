@@ -58,9 +58,11 @@ export default {
 <style scoped>
 /* 操作按钮区域样式 */
 .action-section {
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding: 2rem 1rem;
   position: relative;
+  border-top: 1px solid #f0f0f0;
+  z-index: 2;
 }
 
 .action-section h2 {
