@@ -76,7 +76,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = ' '
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/Iteration2/vue_static')
 ]
