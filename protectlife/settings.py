@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dj_database_url  # type: ignore
+import dj_database_url  # 如果不需要可删除
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # 用于静态文件支持
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # 用于生产环境根路径静态服务
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -34,7 +34,7 @@ ROOT_URLCONF = "protectlife.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'frontend/Iteration2/vue_static')],
+        "DIRS": [BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -47,10 +47,9 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = "protectlife.wsgi.application"
 
-# 数据库配置（如果有 DATABASE_URL 环境变量则使用它，否则使用 SQLite）
+# 数据库配置
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES = {
@@ -76,10 +75,22 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = ' '
+# ——— 静态 & 媒体 文件 配置 ———
+
+# 1. 静态文件 根路径（去除 /static/ 前缀）
+STATIC_URL = '/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/Iteration2/vue_static')
+    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# 2. 媒体文件 前缀（与 STATIC_URL 保持不同）
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# 3. WhiteNoise 存储配置（生产环境使用）
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ——— 其它配置 ———
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
