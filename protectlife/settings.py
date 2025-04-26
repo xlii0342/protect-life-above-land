@@ -75,11 +75,23 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/'  
-STATICFILES_DIRS = [ BASE_DIR/'frontend'/'Iteration2'/'vue_static' ]
-STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
+]
+
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# ——— 其它配置 ———
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
