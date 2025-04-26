@@ -75,21 +75,10 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# ——— 静态 & 媒体 文件 配置 ———
-
-# 1. 静态文件 根路径（去除 /static/ 前缀）
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# 2. 媒体文件 前缀（与 STATIC_URL 保持不同）
-MEDIA_URL  = '/media/'
-
-
-# 3. WhiteNoise 存储配置（生产环境使用）
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_URL = '/'  
+STATICFILES_DIRS = [ BASE_DIR/'frontend'/'Iteration2'/'vue_static' ]
+STATIC_ROOT = BASE_DIR/'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ——— 其它配置 ———
 
