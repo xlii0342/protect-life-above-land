@@ -8,16 +8,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # 静态文件服务
-    re_path(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATIC_ROOT,
-    }),
-    
-    # Vue路由处理
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
+    # Vue路由处理 - 确保这是最后一个路由
+    re_path(r'^(?!static/).*$', TemplateView.as_view(template_name='index.html')),
 ]
 
-# 开发环境下的静态文件和媒体文件服务
+# 添加静态文件服务
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# 开发环境下的媒体文件服务
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

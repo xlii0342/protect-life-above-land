@@ -1,11 +1,11 @@
 import os
 from pathlib import Path
-import dj_database_url  # 如果不需要可删除
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "your_secret_key_here"
-DEBUG = False
+DEBUG = True  # 临时开启调试模式以便查看详细错误信息
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # 用于生产环境根路径静态服务
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -49,7 +49,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "protectlife.wsgi.application"
 
-# 数据库配置
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES = {
@@ -88,13 +87,13 @@ WHITENOISE_MIMETYPES = {
     '.css': 'text/css',
 }
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# 使用标准的静态文件存储
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-# 安全设置
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# 禁用安全设置以便调试
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
