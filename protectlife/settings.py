@@ -5,7 +5,7 @@ import dj_database_url  # 如果不需要可删除
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "your_secret_key_here"
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -70,28 +70,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "zh-hans"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
+# 静态文件配置
 STATIC_URL = '/static/'
-
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
 ]
 
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# 使用简单的静态文件存储
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

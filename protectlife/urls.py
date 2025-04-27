@@ -2,22 +2,17 @@ from django.conf import settings
 from django.urls import path, re_path
 from django.views.static import serve
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # ① 专门映射 /static/ 静态资源（必须最前面）
-    re_path(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATICFILES_DIRS[0],
-    }),
-
-    # ② 根路径首页
-    re_path(r'^$', serve, {'path':'index.html','document_root':settings.STATICFILES_DIRS[0]}),
-    # 其余静态资源
-    re_path(r'^(?P<path>.*)$', serve, {'document_root':settings.STATICFILES_DIRS[0]}),
+    
+    # 所有路由都返回主页，让Vue.js处理前端路由
+    path('', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
 
-# DEBUG 模式下暴露 media
+# DEBUG模式下的media文件服务
 if settings.DEBUG:
     urlpatterns += [
         re_path(r'^media/(?P<path>.*)$', serve, {
