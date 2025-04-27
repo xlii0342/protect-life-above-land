@@ -2,17 +2,21 @@
   <div class="app">
     <nav class="top-nav">
       <div class="logo" @click="goToHome">Pawsitive</div>
-      <div class="hamburger" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
+      <div
+        class="hamburger"
+        @click="toggleMenu"
+        :class="{ active: isMenuOpen }"
+      >
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div class="nav-links" :class="{ 'active': isMenuOpen }">
+      <div class="nav-links" :class="{ active: isMenuOpen }">
         <router-link to="/" @click="closeMenu">Home</router-link>
         <router-link to="/learn" @click="closeMenu">Learn</router-link>
         <router-link to="/map" @click="closeMenu">Map</router-link>
         <router-link to="/report" @click="closeMenu">Report</router-link>
-        <router-link to="/support" @click="closeMenu">Support</router-link>
+        <router-link to="/volunteer" @click="closeMenu">Support</router-link>
       </div>
       <div class="overlay" v-if="isMenuOpen" @click="closeMenu"></div>
     </nav>
@@ -22,24 +26,24 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      isMenuOpen: false
-    }
+      isMenuOpen: false,
+    };
   },
   methods: {
     goToHome() {
-      this.$router.push('/');
+      this.$router.push("/");
     },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
     closeMenu() {
       this.isMenuOpen = false;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
@@ -58,7 +62,7 @@ export default {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
@@ -164,7 +168,7 @@ main {
   .hamburger {
     display: flex;
   }
-  
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -178,11 +182,11 @@ main {
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     z-index: 1002;
   }
-  
+
   .nav-links.active {
     right: 0;
   }
-  
+
   .nav-links a {
     margin: 0;
     padding: 15px 25px;
@@ -190,11 +194,11 @@ main {
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  
+
   .nav-links a:hover {
     background-color: var(--accent-dark);
   }
-  
+
   .overlay {
     position: fixed;
     top: 0;
@@ -205,7 +209,7 @@ main {
     z-index: 1001;
     animation: fadeIn 0.3s ease;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -220,13 +224,13 @@ main {
   .nav-links {
     width: 85%;
   }
-  
+
   .logo {
     font-size: 1.3rem;
   }
-  
+
   .top-nav {
     padding: 0.8rem 1.5rem;
   }
 }
-</style> 
+</style>

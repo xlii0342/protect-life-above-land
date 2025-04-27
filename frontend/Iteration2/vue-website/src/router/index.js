@@ -29,14 +29,12 @@ const routes = [
     name: 'Beginner',
     component: () => import('../views/Learn.vue')
   },
-  // 暂时注释掉缺失的模块
-  /*
+  // Map component is now available
   {
     path: '/map',
     name: 'Map',
     component: () => import('../views/Map.vue')
   },
-  */
   {
     path: '/report',
     name: 'Report',

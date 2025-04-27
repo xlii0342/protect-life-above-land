@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "rest_framework",
     "pawsitive",
 ]
 
@@ -85,7 +86,6 @@ STATICFILES_DIRS = [
 
 # 使用WhiteNoise配置
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-WHITENOISE_ROOT = BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
 
 # 确保WhiteNoise可以处理所有类型的静态文件
 WHITENOISE_MIMETYPES = {
