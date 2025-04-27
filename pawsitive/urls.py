@@ -1,9 +1,14 @@
-
-from django.urls import path 
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
+router = DefaultRouter()
+router.register(r'pets', views.PetViewSet)
+router.register(r'applications', views.AdoptionApplicationViewSet)
+
+app_name = 'pawsitive'
+
 urlpatterns = [
-    # path('submit-form/', views.submit_form, name='submit_form'),
-    # path('get-data/', views.get_data, name='get_data'),
+    path('', include(router.urls)),
 ]
 

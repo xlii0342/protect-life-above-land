@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.views.static import serve
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -8,12 +8,17 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Vue路由处理 - 确保这是最后一个路由
-    re_path(r'^(?!static/).*$', TemplateView.as_view(template_name='index.html')),
+    # API路由
+    path('api/', include('pawsitive.urls')),  # pawsitive应用的API路由
+    
+    # 静态文件服务
+    re_path(r'^static/(?P<path>.*)$', serve, {
+        'document_root': settings.STATIC_ROOT,
+    }),
+    
+    # Vue路由处理 - 所有非API和静态文件的请求都返回index.html
+    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
 ]
-
-# 添加静态文件服务
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # 开发环境下的媒体文件服务
 if settings.DEBUG:
