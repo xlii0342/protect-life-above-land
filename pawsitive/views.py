@@ -24,11 +24,15 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from .models import Pet, AdoptionApplication
-from .serializers import PetSerializer, AdoptionApplicationSerializer
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
+from twilio.rest import Client
+from .models import Pet, AdoptionApplication, VolunteerApplication
+from .serializers import PetSerializer, AdoptionApplicationSerializer, VolunteerApplicationSerializer
 
 import os
 
@@ -120,3 +124,68 @@ class AdoptionApplicationViewSet(viewsets.ModelViewSet):
         pet.save()
         
         return Response({'status': 'success'})
+
+@api_view(['POST'])
+def submit_volunteer_application(request):
+    serializer = VolunteerApplicationSerializer(data=request.data)
+    if serializer.is_valid():
+        application = serializer.save()
+        
+        # 构建邮件内容
+        try:
+            # 发送给申请者的确认邮件
+            subject = 'Welcome to Protect Life Above Land - Volunteer Application Received'
+            message = f'''Dear {application.name},
+
+Thank you for your interest in volunteering with Protect Life Above Land! We are excited about your commitment to protecting Victoria's native species and natural environment.
+
+Your Application Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Name: {application.name}
+• Email: {application.email}
+• Phone: {application.phone}
+• Availability: {application.availability}
+
+Your Experience & Skills:
+{application.experience}
+
+What Happens Next:
+1. Our volunteer coordinator will review your application within 2-3 business days
+2. You will receive an email invitation for an online orientation session
+3. After the orientation, we will match you with suitable volunteer opportunities
+
+Important Information:
+- Please add noreply@protectlife.com to your email contacts
+- Check your spam folder if you don't receive our follow-up email
+- For any questions, please contact us at support@protectlife.com
+
+We truly appreciate your willingness to contribute to our mission of protecting endangered species and their habitats.
+
+Best regards,
+The Protect Life Above Land Team
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This is an automated message, please do not reply to this email.'''
+
+            # 发送邮件
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [application.email],
+                fail_silently=False,
+            )
+
+            return Response({
+                'status': 'success',
+                'message': 'Application submitted successfully! Please check your email for confirmation.'
+            }, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            # 记录错误但仍然返回成功（因为申请已保存）
+            print(f"Failed to send email: {str(e)}")
+            return Response({
+                'status': 'success',
+                'message': 'Application submitted successfully, but there was an issue sending the confirmation email. Our team will contact you soon.'
+            }, status=status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

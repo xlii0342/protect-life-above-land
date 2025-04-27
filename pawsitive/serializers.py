@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Pet, AdoptionApplication
+from .models import Pet, AdoptionApplication, VolunteerApplication
 
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,4 +15,11 @@ class AdoptionApplicationSerializer(serializers.ModelSerializer):
         model = AdoptionApplication
         fields = ['id', 'pet', 'pet_name', 'name', 'phone', 'email', 
                  'address', 'reason', 'status', 'created_at', 'updated_at']
-        read_only_fields = ['status', 'created_at', 'updated_at'] 
+        read_only_fields = ['status', 'created_at', 'updated_at']
+
+class VolunteerApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VolunteerApplication
+        fields = ['id', 'name', 'email', 'phone', 'experience', 
+                 'availability', 'motivation', 'status', 'created_at']
+        read_only_fields = ['status', 'created_at'] 

@@ -1,6 +1,10 @@
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+
+# 加载 .env 文件中的环境变量
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +41,10 @@ ROOT_URLCONF = "protectlife.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'],
+        "DIRS": [
+            BASE_DIR / 'frontend' / 'dist',  # Vue.js 构建输出目录
+            BASE_DIR / 'templates',  # Django 模板目录
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -119,3 +126,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS 设置
 CORS_ALLOW_ALL_ORIGINS = True  # 开发环境下允许所有来源
 CORS_ALLOW_CREDENTIALS = True
+
+# Email配置 - SendGrid
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # 固定值
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')  # 从环境变量获取
+DEFAULT_FROM_EMAIL = 'noreply@protectlife.com'  # 发件人邮箱
+
+# 开发环境下使用控制台输出邮件内容
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# SMS配置 - Twilio
+TWILIO_ACCOUNT_SID = 'your_account_sid'
+TWILIO_AUTH_TOKEN = 'your_auth_token'
+TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'

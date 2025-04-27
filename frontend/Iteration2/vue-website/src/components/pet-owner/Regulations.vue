@@ -55,14 +55,6 @@
     <div v-if="councilName" style="margin-top: 1rem;">
       <p>📍 Your Local Council is: <strong>{{ councilName }}</strong></p>
     </div>
-    
-    <div style="margin-top: 3rem;">
-      <h2>Questions?</h2>
-      <p>If you have any questions about responsible cat ownership, please feel free to contact our team.</p>
-      <div style="margin-top: 1rem;">
-        <a href="mailto:info@pawsitive.org" class="btn" style="display: inline-block; text-decoration: none;">Contact Us</a>
-      </div>
-    </div>
   </div>
 </template>
 

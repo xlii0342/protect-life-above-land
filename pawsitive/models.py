@@ -54,3 +54,27 @@ class AdoptionApplication(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.pet.name}"
+
+class VolunteerApplication(models.Model):
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending Review'),
+        ('APPROVED', 'Approved'),
+        ('REJECTED', 'Rejected'),
+    ]
+    
+    name = models.CharField('Name', max_length=100)
+    email = models.EmailField('Email')
+    phone = models.CharField('Phone Number', max_length=20)
+    experience = models.TextField('Experience')
+    availability = models.TextField('Availability')
+    motivation = models.TextField('Motivation')
+    status = models.CharField('Status', max_length=20, choices=STATUS_CHOICES, default='PENDING')
+    created_at = models.DateTimeField('Created At', auto_now_add=True)
+    updated_at = models.DateTimeField('Updated At', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Volunteer Application'
+        verbose_name_plural = 'Volunteer Applications'
+
+    def __str__(self):
+        return f"{self.name} - {self.created_at.strftime('%Y-%m-%d')}"

@@ -10,5 +10,6 @@ app_name = 'pawsitive'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('volunteer/', views.submit_volunteer_application, name='submit_volunteer'),
 ]
 

@@ -6,40 +6,72 @@
 
     <div class="container">
       <div class="intro-card">
-        <p>Join our volunteer team to help protect Victoria's native species and natural environment. Whatever your skills or experience, we have volunteering opportunities for you.</p>
-        <p>As a volunteer, you will participate in important wildlife conservation work, meet like-minded friends, and contribute to protecting our valuable natural heritage.</p>
+        <p>
+          Join our volunteer team to help protect Victoria's native species and
+          natural environment. Whatever your skills or experience, we have
+          volunteering opportunities for you.
+        </p>
+        <p>
+          As a volunteer, you will participate in important wildlife
+          conservation work, meet like-minded friends, and contribute to
+          protecting our valuable natural heritage.
+        </p>
       </div>
 
       <div class="volunteer-options">
         <h2>Volunteer Opportunities</h2>
-        
+
         <div class="opportunity-grid">
           <div class="opportunity-card">
             <div class="icon">🔍</div>
             <h3>Field Surveys</h3>
-            <p>Participate in wildlife population surveys, help collect important scientific data, and monitor the recovery of endangered species.</p>
-            <p><strong>Time Commitment:</strong> 1-2 times per month, 4-8 hours each</p>
+            <p>
+              Participate in wildlife population surveys, help collect important
+              scientific data, and monitor the recovery of endangered species.
+            </p>
+            <p>
+              <strong>Time Commitment:</strong> 1-2 times per month, 4-8 hours
+              each
+            </p>
           </div>
-          
+
           <div class="opportunity-card">
             <div class="icon">🏞️</div>
             <h3>Habitat Restoration</h3>
-            <p>Participate in native planting and weed removal activities to help restore critical habitats for endangered species.</p>
-            <p><strong>Time Commitment:</strong> Flexible, can attend single events</p>
+            <p>
+              Participate in native planting and weed removal activities to help
+              restore critical habitats for endangered species.
+            </p>
+            <p>
+              <strong>Time Commitment:</strong> Flexible, can attend single
+              events
+            </p>
           </div>
-          
+
           <div class="opportunity-card">
             <div class="icon">🏫</div>
             <h3>Education & Outreach</h3>
-            <p>Promote wildlife conservation knowledge in schools and community events to raise public awareness about endangered species.</p>
-            <p><strong>Time Commitment:</strong> 2-4 times per month, 2-3 hours each</p>
+            <p>
+              Promote wildlife conservation knowledge in schools and community
+              events to raise public awareness about endangered species.
+            </p>
+            <p>
+              <strong>Time Commitment:</strong> 2-4 times per month, 2-3 hours
+              each
+            </p>
           </div>
-          
+
           <div class="opportunity-card">
             <div class="icon">💻</div>
             <h3>Remote Support</h3>
-            <p>Help with data processing, social media management, translation of materials, or administrative support.</p>
-            <p><strong>Time Commitment:</strong> Flexible, can be completed from home</p>
+            <p>
+              Help with data processing, social media management, translation of
+              materials, or administrative support.
+            </p>
+            <p>
+              <strong>Time Commitment:</strong> Flexible, can be completed from
+              home
+            </p>
           </div>
         </div>
       </div>
@@ -50,53 +82,88 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" v-model="formData.name" required>
+              <input type="text" id="name" v-model="form.name" required />
             </div>
-            
+
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" v-model="formData.email" required>
+              <input type="email" id="email" v-model="form.email" required />
             </div>
           </div>
-          
+
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" v-model="formData.phone" required>
+              <input type="tel" id="phone" v-model="form.phone" required />
             </div>
-            
+
             <div class="form-group">
               <label for="location">Location</label>
-              <input type="text" id="location" v-model="formData.location" placeholder="E.g., Melbourne, Geelong, etc." required>
+              <input
+                type="text"
+                id="location"
+                v-model="form.location"
+                placeholder="E.g., Melbourne, Geelong, etc."
+                required
+              />
             </div>
           </div>
-          
+
           <div class="form-group">
-            <label>Interested Volunteer Opportunities (Multiple Selection)</label>
+            <label
+              >Interested Volunteer Opportunities (Multiple Selection)</label
+            >
             <div class="checkbox-group">
               <label class="checkbox-label">
-                <input type="checkbox" v-model="formData.interests" value="survey"> Field Surveys
+                <input
+                  type="checkbox"
+                  v-model="form.interests"
+                  value="survey"
+                />
+                Field Surveys
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" v-model="formData.interests" value="habitat"> Habitat Restoration
+                <input
+                  type="checkbox"
+                  v-model="form.interests"
+                  value="habitat"
+                />
+                Habitat Restoration
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" v-model="formData.interests" value="education"> Education & Outreach
+                <input
+                  type="checkbox"
+                  v-model="form.interests"
+                  value="education"
+                />
+                Education & Outreach
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" v-model="formData.interests" value="remote"> Remote Support
+                <input
+                  type="checkbox"
+                  v-model="form.interests"
+                  value="remote"
+                />
+                Remote Support
               </label>
             </div>
           </div>
-          
+
           <div class="form-group">
-            <label for="experience">Relevant Experience and Skills (Optional)</label>
-            <textarea id="experience" v-model="formData.experience" rows="3" placeholder="Please describe your relevant experience, skills or expertise"></textarea>
+            <label for="experience"
+              >Relevant Experience and Skills (Optional)</label
+            >
+            <textarea
+              id="experience"
+              v-model="form.experience"
+              rows="3"
+              placeholder="Please describe your relevant experience, skills or expertise"
+            ></textarea>
           </div>
-          
+
           <div class="form-group">
             <label for="availability">Availability</label>
-            <select id="availability" v-model="formData.availability" required>
+            <select id="availability" v-model="form.availability" required>
               <option value="">Please Select</option>
               <option value="weekdays">Weekdays</option>
               <option value="weekends">Weekends</option>
@@ -104,25 +171,43 @@
               <option value="flexible">Flexible</option>
             </select>
           </div>
-          
+
           <div class="form-group">
-            <button type="submit" class="submit-btn" :disabled="isSubmitting">
-              {{ isSubmitting ? 'Submitting...' : 'Submit Application' }}
+            <label for="motivation">Motivation</label>
+            <textarea
+              id="motivation"
+              v-model="form.motivation"
+              rows="3"
+              placeholder="Why are you interested in becoming a volunteer?"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="submit-btn" :disabled="submitting">
+              {{ submitting ? "Submitting..." : "Submit Application" }}
             </button>
           </div>
         </form>
       </div>
-      
+
       <div class="testimonials">
         <h2>Volunteer Testimonials</h2>
         <div class="testimonial-grid">
           <div class="testimonial">
-            <p class="quote">"Becoming a wildlife conservation volunteer was one of the most meaningful decisions I've ever made. Being able to directly participate in protecting endangered species gives me immense satisfaction."</p>
+            <p class="quote">
+              "Becoming a wildlife conservation volunteer was one of the most
+              meaningful decisions I've ever made. Being able to directly
+              participate in protecting endangered species gives me immense
+              satisfaction."
+            </p>
             <p class="author">— Li Ming, Melbourne</p>
           </div>
-          
+
           <div class="testimonial">
-            <p class="quote">"Through volunteering, I've not only learned a lot about native ecosystems but also made many like-minded friends."</p>
+            <p class="quote">
+              "Through volunteering, I've not only learned a lot about native
+              ecosystems but also made many like-minded friends."
+            </p>
             <p class="author">— Zhang Hua, Bendigo</p>
           </div>
         </div>
@@ -133,51 +218,65 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
+import Footer from "@/components/Footer.vue";
+import axios from "axios";
 
 export default {
-  name: 'Volunteer',
+  name: "Volunteer",
   components: {
-    Footer
+    Footer,
   },
   data() {
     return {
-      formData: {
-        name: '',
-        email: '',
-        phone: '',
-        location: '',
+      form: {
+        name: "",
+        email: "",
+        phone: "",
+        location: "",
         interests: [],
-        experience: '',
-        availability: ''
+        experience: "",
+        availability: "",
+        motivation: "",
       },
-      isSubmitting: false
-    }
+      submitting: false,
+      submitStatus: null,
+      submitMessage: "",
+    };
   },
   methods: {
-    submitApplication() {
-      this.isSubmitting = true
-      
-      // Simulate API request
-      setTimeout(() => {
-        // Successful handling
-        this.isSubmitting = false
-        alert('Thank you for your application! We will contact you soon.')
-        
-        // Reset form
-        this.formData = {
-          name: '',
-          email: '',
-          phone: '',
-          location: '',
+    async submitApplication() {
+      this.submitting = true;
+      this.submitStatus = null;
+      this.submitMessage = "";
+
+      try {
+        const response = await axios.post("/api/volunteer/", this.form);
+        this.submitStatus = "success";
+        this.submitMessage =
+          "Application submitted successfully! Check your email and phone for confirmation.";
+
+        // 清空表单
+        this.form = {
+          name: "",
+          email: "",
+          phone: "",
+          location: "",
           interests: [],
-          experience: '',
-          availability: ''
-        }
-      }, 2000)
-    }
-  }
-}
+          experience: "",
+          availability: "",
+          motivation: "",
+        };
+      } catch (error) {
+        this.submitStatus = "error";
+        this.submitMessage =
+          error.response?.data?.message ||
+          "Failed to submit application. Please try again.";
+      } finally {
+        this.submitting = false;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -188,12 +287,12 @@ export default {
 }
 
 .header {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 2rem;
   text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .header h1 {
@@ -207,7 +306,7 @@ export default {
   background-color: #f9f9f9;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   margin-top: 0;
   margin-bottom: 2rem;
 }
@@ -216,7 +315,7 @@ export default {
   background-color: white;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   margin-bottom: 1.5rem;
 }
 
@@ -246,7 +345,7 @@ h2 {
   background-color: white;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
 }
 
@@ -279,7 +378,7 @@ h2 {
   background-color: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form-row {
@@ -331,7 +430,7 @@ h2 {
 }
 
 .submit-btn {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -368,7 +467,7 @@ h2 {
   background-color: white;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .testimonial .quote {
@@ -379,30 +478,40 @@ h2 {
 
 .testimonial .author {
   font-weight: 600;
-  color: #4CAF50;
+  color: #4caf50;
+}
+
+.success-message {
+  color: green;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
   .header h1 {
     font-size: 1.8rem;
   }
-  
+
   .container {
     padding: 1.5rem;
   }
-  
+
   .opportunity-grid,
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  
+
   .checkbox-group {
     grid-template-columns: 1fr;
   }
 }
-</style> 
+</style>
