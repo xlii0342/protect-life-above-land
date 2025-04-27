@@ -42,7 +42,6 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / 'frontend' / 'dist',  # Vue.js 构建输出目录
             BASE_DIR / 'templates',  # Django 模板目录
         ],
         "APP_DIRS": True,
@@ -88,7 +87,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
+    BASE_DIR / 'static',  # 项目级静态文件
 ]
 
 # 使用WhiteNoise配置

@@ -30,11 +30,14 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
-from twilio.rest import Client
+# from twilio.rest import Client  # 暂时注释掉，因为现在不需要 SMS 功能
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, To, Email, Content
 from .models import Pet, AdoptionApplication, VolunteerApplication
 from .serializers import PetSerializer, AdoptionApplicationSerializer, VolunteerApplicationSerializer
 
 import os
+from datetime import datetime
 
 def vue_app(request):
     vue_index_path = os.path.join(os.path.dirname(__file__), 'vue_static', 'index.html')
@@ -131,49 +134,28 @@ def submit_volunteer_application(request):
     if serializer.is_valid():
         application = serializer.save()
         
-        # 构建邮件内容
         try:
-            # 发送给申请者的确认邮件
-            subject = 'Welcome to Protect Life Above Land - Volunteer Application Received'
-            message = f'''Dear {application.name},
+            # 准备 SendGrid 邮件数据
+            dynamic_template_data = {
+                'volunteer_name': application.name,
+                'submitted_date': application.created_at.strftime("%B %d, %Y"),
+                'opportunities': application.experience,  # 或其他相关字段
+                'availability': application.availability
+            }
 
-Thank you for your interest in volunteering with Protect Life Above Land! We are excited about your commitment to protecting Victoria's native species and natural environment.
-
-Your Application Details:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Name: {application.name}
-• Email: {application.email}
-• Phone: {application.phone}
-• Availability: {application.availability}
-
-Your Experience & Skills:
-{application.experience}
-
-What Happens Next:
-1. Our volunteer coordinator will review your application within 2-3 business days
-2. You will receive an email invitation for an online orientation session
-3. After the orientation, we will match you with suitable volunteer opportunities
-
-Important Information:
-- Please add noreply@protectlife.com to your email contacts
-- Check your spam folder if you don't receive our follow-up email
-- For any questions, please contact us at support@protectlife.com
-
-We truly appreciate your willingness to contribute to our mission of protecting endangered species and their habitats.
-
-Best regards,
-The Protect Life Above Land Team
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-This is an automated message, please do not reply to this email.'''
+            # 创建 SendGrid 邮件
+            message = Mail(
+                from_email=Email(settings.DEFAULT_FROM_EMAIL),
+                to_emails=To(application.email)
+            )
+            
+            # 设置模板 ID（需要替换为你的实际模板 ID）
+            message.template_id = 'd-your-template-id'  # 替换为你的 SendGrid 模板 ID
+            message.dynamic_template_data = dynamic_template_data
 
             # 发送邮件
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [application.email],
-                fail_silently=False,
-            )
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            response = sg.send(message)
 
             return Response({
                 'status': 'success',
