@@ -85,9 +85,20 @@ STATICFILES_DIRS = [
 
 # 使用WhiteNoise配置
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+WHITENOISE_ROOT = BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
+
+# 确保WhiteNoise可以处理所有类型的静态文件
 WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
     '.css': 'text/css',
+    '.ico': 'image/x-icon',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+    '.woff': 'application/font-woff',
+    '.woff2': 'application/font-woff2',
+    '.ttf': 'application/font-sfnt',
+    '.eot': 'application/vnd.ms-fontobject'
 }
 
 # 生产环境安全设置

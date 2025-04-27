@@ -9,15 +9,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # API路由
-    path('api/', include('pawsitive.urls')),  # pawsitive应用的API路由
+    path('api/', include('pawsitive.urls')),
     
-    # 静态文件服务
-    path('static/<path:path>', serve, {
-        'document_root': settings.STATIC_ROOT,
-    }),
-    
-    # Vue路由处理 - 所有非API和静态文件的请求都返回index.html
-    re_path(r'^(?!api/|static/).*$', TemplateView.as_view(template_name='index.html')),
+    # Vue路由处理 - 所有非API请求都返回index.html
+    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
 ]
 
 # 开发环境下的媒体文件服务
