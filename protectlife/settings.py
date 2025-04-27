@@ -9,7 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "your_secret_key_here"
-DEBUG = True  # 临时开启调试模式以便查看详细错误信息
+DEBUG = True  # 开启调试模式以便查看详细错误信息
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -42,7 +42,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / 'templates',  # Django 模板目录
+            BASE_DIR / 'templates',               # 自定义 Django 模板目录
+            BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',              # 前端打包输出的 index.html
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -58,6 +59,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "protectlife.wsgi.application"
 
+# 数据库配置
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES = {
@@ -83,17 +85,15 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# 静态文件配置
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # 项目级静态文件
+    # 指向前端打包输出目录
+    BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',
 ]
 
-# 使用WhiteNoise配置
+# WhiteNoise 压缩与缓存管理
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# 确保WhiteNoise可以处理所有类型的静态文件
 WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
     '.css': 'text/css',
@@ -123,23 +123,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS 设置
-CORS_ALLOW_ALL_ORIGINS = True  # 开发环境下允许所有来源
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# Email配置 - SendGrid
+# 邮件（SendGrid）配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'  # 固定值
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')  # 从环境变量获取
-DEFAULT_FROM_EMAIL = 'noreply@protectlife.com'  # 发件人邮箱
-
-# 开发环境下使用控制台输出邮件内容
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')
+DEFAULT_FROM_EMAIL = 'noreply@protectlife.com'
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# SMS配置 - Twilio
-TWILIO_ACCOUNT_SID = 'your_account_sid'
-TWILIO_AUTH_TOKEN = 'your_auth_token'
-TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
