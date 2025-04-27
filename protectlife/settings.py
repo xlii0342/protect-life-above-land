@@ -82,8 +82,19 @@ STATICFILES_DIRS = [
     BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static'
 ]
 
-# 使用简单的静态文件存储
+# 使用WhiteNoise配置
+WHITENOISE_MIMETYPES = {
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+}
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# 安全设置
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
