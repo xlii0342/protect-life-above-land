@@ -40,3 +40,9 @@ urlpatterns += [
         name='spa-entry'
     ),
 ]
+
+from django.http import HttpResponseNotFound
+
+urlpatterns += [
+    re_path(r'^static/$', lambda request: HttpResponseNotFound("Direct access to /static/ is not allowed."))
+]
