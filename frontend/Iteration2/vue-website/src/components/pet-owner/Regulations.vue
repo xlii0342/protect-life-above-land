@@ -191,6 +191,10 @@ export default {
 }
 </script>
 
+
+
+
+
 <style scoped>
 :root {
   --primary: #2f4f4f;
