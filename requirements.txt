@@ -5,7 +5,7 @@ charset-normalizer==3.3.2
 dj-database-url==2.1.0
 Django==4.2.7
 djangorestframework==3.14.0
-django-cors-headers==4.3.1
+django-cors-headers==4.7.0
 gunicorn==21.2.0
 idna==3.6
 numpy==1.26.4
