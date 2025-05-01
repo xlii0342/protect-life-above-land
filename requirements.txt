@@ -12,7 +12,7 @@ numpy==1.26.4
 packaging==23.2
 Pillow==10.0.1
 psycopg2-binary==2.9.9
-python-dotenv==1.0.1
+python-dotenv==1.1.0
 requests==2.31.0
 sqlparse==0.4.4
 twilio==8.12.0
