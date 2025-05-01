@@ -3,14 +3,14 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 
-# 加载 .env 文件中的环境变量
+# 加载 .env 中的环境变量
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "your_secret_key_here"
-DEBUG = True  # 开启调试模式以便查看详细错误信息
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -42,8 +42,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / 'templates',               # 自定义 Django 模板目录
-            BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',              # 前端打包输出的 index.html
+            BASE_DIR / 'templates',
+            BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -81,58 +81,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "zh-hans"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Australia/Melbourne"
 USE_I18N = True
 USE_TZ = True
 
+# 静态文件配置（支持 SPA 刷新）
 STATIC_URL = '/assets/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    # 指向前端打包输出目录
     BASE_DIR / 'frontend' / 'Iteration2' / 'vue_static',
 ]
-
-# WhiteNoise 压缩与缓存管理
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-WHITENOISE_MIMETYPES = {
-    '.js': 'application/javascript',
-    '.css': 'text/css',
-    '.ico': 'image/x-icon',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml',
-    '.woff': 'application/font-woff',
-    '.woff2': 'application/font-woff2',
-    '.ttf': 'application/font-sfnt',
-    '.eot': 'application/vnd.ms-fontobject'
-}
 
-# 生产环境安全设置
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-else:
-    SECURE_SSL_REDIRECT = False
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
-
+# 媒体文件（如果暂时不需要，可以一并去掉 MEDIA_URL/ROOT）
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# CORS 设置
+# CORS 配置
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# 邮件（SendGrid）配置
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')
-DEFAULT_FROM_EMAIL = 'noreply@protectlife.com'
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

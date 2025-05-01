@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+
+    "heroku-postbuild": "npm install --prefix frontend/Iteration2/vue-website && npm run build --prefix frontend/Iteration2/vue-website"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -25,4 +27,4 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   }
-} 
+}

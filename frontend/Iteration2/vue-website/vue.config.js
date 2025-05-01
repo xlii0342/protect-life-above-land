@@ -1,8 +1,17 @@
+// frontend/Iteration2/vue-website/vue.config.js
+
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
-  publicPath: '/static/',    // Django 配置的 STATIC_URL
-  outputDir: 'dist',
+
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/assets/'
+    : '/',
+
+  
+  outputDir: '../vue_static',
+
+ 
   assetsDir: '',
 
   indexPath: 'index.html',
