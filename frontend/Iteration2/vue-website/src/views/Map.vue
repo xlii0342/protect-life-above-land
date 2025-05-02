@@ -1,14 +1,6 @@
 <template>
   <div class="map-page">
     <h1 class="page-title">Interactive Maps
-      <!-- Information Icon -->
-      <span class="info-icon" title="Atlas of Living Australia">
-        ⓘ
-        <div class="info-tooltip">
-          Data Source: Atlas of Living Australia. <br>
-          Visit <a href="https://www.ala.org.au/" target="_blank">Atlas of Living Australia</a> for more details.
-        </div>
-      </span>
     </h1>
     
     <div class="map-selection">
@@ -26,7 +18,16 @@
     <div class="map-container">
       <!-- Feral Cats Section -->
       <div v-if="activeSection === 'feralcats'" class="map-section">
-        <h2>Feral Cat Distribution</h2>
+        <h2>Feral Cat Distribution
+        <!-- Information Icon -->
+        <span class="info-icon" title="Atlas of Living Australia">
+          ⓘ
+          <div class="info-tooltip">
+            Data Source: Atlas of Living Australia. <br>
+            Visit <a href="https://www.ala.org.au/" target="_blank">Atlas of Living Australia</a> for more details.
+          </div>
+        </span>
+        </h2>
         <p class="section-description">
           This map shows the distribution and density of feral cats across Victoria, highlighting areas of concern and population hotspots.
           Feral cats have significant impacts on native wildlife and understanding their distribution helps target conservation efforts.
@@ -65,7 +66,16 @@
       
       <!-- Endangered Animals Section -->
       <div v-if="activeSection === 'endangered'" class="map-section">
-        <h2>Endangered Species Distribution</h2>
+        <h2>Endangered Species Distribution
+        <!-- Information Icon -->
+        <span class="info-icon" title="Atlas of Living Australia">
+          ⓘ
+          <div class="info-tooltip">
+            Data Source: Atlas of Living Australia. <br>
+            Visit <a href="https://www.ala.org.au/" target="_blank">Atlas of Living Australia</a> for more details.
+          </div>
+        </span>
+        </h2>
         <p class="section-description">
           This map shows the distribution of endangered and threatened species across Victoria, 
           highlighting biodiversity hotspots and critical habitats that require protection.
@@ -329,6 +339,7 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   font-size: 0.9rem;
+  font-weight: 200; /* Add this to make the font slim */
   line-height: 1.4;
   width: 220px;
   z-index: 10;
