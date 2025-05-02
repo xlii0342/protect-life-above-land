@@ -130,7 +130,7 @@ export default {
 
     const fetchFeralCatData = async () => {
       try {
-        const response = await fetch('/data/feral_cats_with_density.csv');
+        const response = await fetch('/assets/data/feral_cats_with_density.csv');
         const csvText = await response.text();
 
         const parsedData = Papa.parse(csvText, {
@@ -147,7 +147,7 @@ export default {
 
     const fetchEndangeredSpeciesData = async () => {
       try {
-        const response = await fetch('/data/complete_endangered_species.csv');
+        const response = await fetch('/assets/data/complete_endangered_species.csv');
         const csvText = await response.text();
         const parsedData = Papa.parse(csvText, {
           header: true,
