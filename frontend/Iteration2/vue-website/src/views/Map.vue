@@ -1,6 +1,15 @@
 <template>
   <div class="map-page">
-    <h1 class="page-title">Interactive Maps</h1>
+    <h1 class="page-title">Interactive Maps
+      <!-- Information Icon -->
+      <span class="info-icon" title="Atlas of Living Australia">
+        ⓘ
+        <div class="info-tooltip">
+          Data Source: Atlas of Living Australia. <br>
+          Visit <a href="https://www.ala.org.au/" target="_blank">Atlas of Living Australia</a> for more details.
+        </div>
+      </span>
+    </h1>
     
     <div class="map-selection">
       <button 
@@ -295,6 +304,44 @@ export default {
   color: #2c3e50;
   margin-bottom: 2rem;
   font-size: 2.2rem;
+}
+.info-icon {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-left: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.info-icon:hover .info-tooltip {
+  display: block;
+}
+
+.info-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  width: 220px;
+  z-index: 10;
+  text-align: center;
+}
+
+.info-tooltip a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.info-tooltip a:hover {
+  text-decoration: underline;
 }
 
 .map-selection {
