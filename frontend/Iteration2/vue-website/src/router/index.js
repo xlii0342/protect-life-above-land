@@ -44,6 +44,12 @@ const routes = [
     path: '/volunteer',
     name: 'Volunteer',
     component: () => import('../views/Volunteer.vue')
+  },
+  // 游戏化组件
+  {
+    path: '/gamification',
+    name: 'Gamification',
+    component: () => import('../components/Gamification.vue')
   }
 ]
 

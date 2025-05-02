@@ -13,6 +13,7 @@
         <router-link to="/map" @click="closeMenu">Map</router-link>
         <router-link to="/report" @click="closeMenu">Report</router-link>
         <router-link to="/support" @click="closeMenu">Support</router-link>
+        <router-link to="/gamification" @click="closeMenu">Garden Game</router-link>
       </div>
       <div class="overlay" v-if="isMenuOpen" @click="closeMenu"></div>
     </nav>

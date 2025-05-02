@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Garden Adventure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #e0f7fa; }
+    #game-container { display: flex; height: 100vh; }
+    #sidebar { width: 240px; background: #ffffff; padding: 1rem; box-shadow: 2px 0 10px rgba(0,0,0,0.1); overflow-y: auto; }
+    #garden { flex: 1; position: relative; background: #f4a460; overflow: visible; }
+    .step-title { font-size: 1.25rem; margin-top: 1rem; font-weight: 600; color: #2f4f4f; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .options button { padding: 0.6rem; background: #80cbc4; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.3s; }
+    .options button:hover { background: #4db6ac; }
+    #surprise-btn { margin-top: 1.5rem; padding: 0.8rem; background: #ffe082; color: #2f4f4f; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: 700; }
+    .dialog-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:200; visibility:hidden; opacity:0; transition: opacity 0.3s; }
+    .dialog-overlay.show { visibility: visible; opacity: 1; }
+    .dialog { background: #fff9c4; padding: 1rem 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 300px; }
+    .dialog p { margin: 0.5rem 0; font-weight: 600; }
+    #speciesModal .dialog { max-width: 350px; background: #fff; }
+    #speciesModal img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 0.5rem; }
+    #speciesModal h3 { margin: 0.5rem 0; color: #2f4f4f; }
+    #speciesModal p { font-size: 0.9rem; }
+    .shrub-item { position: absolute; width: 200px; pointer-events: none; }
+    .tree-item { position: absolute; width: 500px; pointer-events: none; }
+    .animal-card { position: absolute; width: 300px; background: rgba(255,255,255,0.9); border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .animal-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+    .animal-card h4 { margin: 0.5rem 0; }
+    .animal-card small { display: block; margin-top: 0.25rem; font-size: 0.85rem; }
+    .animal-card button { margin-top: 0.5rem; padding: 0.5rem 1rem; border: none; border-radius: 6px; background: #4db6ac; color: white; cursor: pointer; font-weight: 600; }
+    .anim-icon { position: absolute; width: 150px; pointer-events: none; }
+    @keyframes panIcon {
+      0% { left: -150px; top: 50%; transform: translateY(-50%) scaleX(1); }
+      100% { left: 50%; top: 50%; transform: translate(-50%,-50%) scaleX(1); }
+    }
+    #confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 250; }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="sidebar">
+      <div id="step1">
+        <div class="step-title">Step 1: Choose Soil</div>
+        <div class="options">
+          <button data-value="Shrubland Clay">Shrubland Clay</button>
+          <button data-value="Grassland Loam">Grassland Loam</button>
+          <button data-value="Mallee Loam">Mallee Loam</button>
+        </div>
+      </div>
+      <div id="step2">
+        <div class="step-title">Step 2: Ground Cover</div>
+        <div class="options">
+          <button data-value="Heath Hummock">Heath Hummock</button>
+          <button data-value="Meadow Tussock">Meadow Tussock</button>
+          <button data-value="Spinifex Grass">Spinifex Grass</button>
+        </div>
+      </div>
+      <div id="step3">
+        <div class="step-title">Step 3: Shrubs</div>
+        <div class="options">
+          <button data-value="Mallee Shrub">Mallee Shrub</button>
+          <button data-value="Coastal Heath Bush">Coastal Heath Bush</button>
+        </div>
+      </div>
+      <div id="step4">
+        <div class="step-title">Step 4: Trees</div>
+        <div class="options">
+          <button data-value="Eucalypt Mallee">Eucalypt Mallee</button>
+          <button data-value="River Red Gum">River Red Gum</button>
+        </div>
+      </div>
+      <button id="surprise-btn">Click here for a surprise!</button>
+    </div>
+    <div id="garden"></div>
+  </div>
+
+  <div id="feedbackDialog" class="dialog-overlay"><div class="dialog"><p id="feedbackText"></p></div></div>
+  <div id="nextDialog" class="dialog-overlay"><div class="dialog"><p id="nextText"></p></div></div>
+  <div id="congratsDialog" class="dialog-overlay"><div class="dialog"><p>🎉 Congratulations—you saved an animal! 🎉</p></div></div>
+  <div id="suggestionModal" class="dialog-overlay"><div class="dialog"><p id="suggestionText"></p><button id="suggestConfirm">Yes</button><button id="suggestCancel">No</button></div></div>
+  <div id="speciesModal" class="dialog-overlay"><div class="dialog"><img id="modalImg" src="" alt=""><h3 id="modalName"></h3><p id="modalDetail"></p><button onclick="closeSpeciesModal()">Okay!</button></div></div>
+
+  <canvas id="confetti-canvas"></canvas>
+  <audio id="confettiSound" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_76a1d4b51e.mp3?filename=bells-exciting-6345.mp3"></audio>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const garden = document.getElementById('garden'),
+          feedbackDialog = document.getElementById('feedbackDialog'),
+          feedbackText = document.getElementById('feedbackText'),
+          nextDialog = document.getElementById('nextDialog'),
+          nextText = document.getElementById('nextText'),
+          congratsDialog = document.getElementById('congratsDialog'),
+          suggestionModal = document.getElementById('suggestionModal'),
+          suggestionText = document.getElementById('suggestionText'),
+          suggestConfirm = document.getElementById('suggestConfirm'),
+          suggestCancel = document.getElementById('suggestCancel'),
+          speciesModal = document.getElementById('speciesModal'),
+          modalImg = document.getElementById('modalImg'),
+          modalName = document.getElementById('modalName'),
+          modalDetail = document.getElementById('modalDetail'),
+          confettiCanvas = document.getElementById('confetti-canvas'),
+          confettiSound = document.getElementById('confettiSound');
+    let selections = {};
+    const soilColors = {'Shrubland Clay':'#d2b48c','Grassland Loam':'#cdb79e','Mallee Loam':'#deb887'};
+    const grassImg = 'https://png.pngtree.com/png-vector/20200917/ourmid/pngtree-green-grass-border-on-transparent-background-vector-png-image_2347202.jpg';
+    const shrubImgs = {'Mallee Shrub':'https://img.freepik.com/free-psd/lush-green-shrubbery-3d-render-vibrant-foliage_191095-91261.jpg?semt=ais_hybrid&w=740','Coastal Heath Bush':'https://icon2.cleanpng.com/20240307/hpp/transparent-bushes-bush-green-leaves-white-flowers-grass-single-bush-with-green-leaves-and-white-1710848009966.webp'};
+    const treeImgs = {'Eucalypt Mallee':'https://img.freepik.com/free-psd/majestic-pine-tree-symbol-resilience-longevity_632498-24302.jpg','River Red Gum':'https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2021/02/H83TRA-scaled.jpg?fit=2560%2C1707&ssl=1'};
+    const species = [
+      {name:'Black-eared Miner',habitat:{soil:'Shrubland Clay',grass:'Heath Hummock',shrub:'Mallee Shrub',tree:'Eucalypt Mallee'},img:'https://live-production.wcms.abc-cdn.net.au/c84d05b9098340f279a981825d31b15a?impolicy=wcms_crop_resize&cropH=3127&cropW=4691&xPos=0&yPos=0&width=862&height=575',facts:['Live in mallee understorey','Eat insects and seeds']},
+      {name:'Orange-bellied Parrot',habitat:{soil:'Grassland Loam',grass:'Meadow Tussock',shrub:'Coastal Heath Bush',tree:'River Red Gum'},img:'https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2021/02/H83TRA-scaled.jpg?fit=2560%2C1707&ssl=1',facts:['Migrate from Tasmania','Eat seeds and berries']},
+      {name:'Mallee Emu-wren',habitat:{soil:'Mallee Loam',grass:'Spinifex Grass',shrub:'Mallee Shrub',tree:'Eucalypt Mallee'},img:'https://i0.wp.com/www.australiangeographic.com.au/wp-content/uploads/2024/10/Mallee-Emu-wren_adjusted-scaled-e1730099610660.jpg?fit=1800%2C1259&ssl=1',facts:['Hide in spinifex grass','Very small and colourful']}];
+
+    // Utility to show dialogs
+    function showDialog(dlg,msg,cb){ dlg.querySelector('p').textContent = msg; dlg.classList.add('show'); setTimeout(()=>{ dlg.classList.remove('show'); cb && cb(); }, 1800); }
+
+    // Animate icon from off-screen to center in 3s
+    function animateIcon(src, flip, cb){
+      const icon = document.createElement('img'); icon.src = src; icon.className = 'anim-icon';
+      icon.style.transform = flip ? 'scaleX(-1)' : 'scaleX(1)';
+      icon.style.animation = 'panIcon 3s ease-in-out forwards';
+      garden.appendChild(icon);
+      setTimeout(()=>{ garden.removeChild(icon); cb && cb(); }, 3000);
+    }
+
+    // Handle steps with feedback and next prompt
+    function handleStep(type, iconUrl, flip, nextLabel, plant) {
+      animateIcon(iconUrl, flip, () => {
+        plant();
+        showDialog(feedbackDialog, `Great job! You added ${selections[type]}`, () => {
+          if (nextLabel) showDialog(nextDialog, `Now choose your ${nextLabel}!`);
+        });
+      });
+    }
+
+    // Step event attachments
+    document.querySelectorAll('#step1 .options button').forEach(btn => btn.onclick = () => {
+      selections.soil = btn.dataset.value;
+      handleStep('soil', 'https://png.pngtree.com/png-clipart/20210801/ourmid/pngtree-wheelbarrow-png-image_3768232.jpg', false, 'ground cover', () => {
+        garden.style.background = soilColors[selections.soil];
+      });
+    });
+    document.querySelectorAll('#step2 .options button').forEach(btn => btn.onclick = () => {
+      selections.grass = btn.dataset.value;
+      handleStep('grass', 'https://png.pngtree.com/png-vector/20240827/ourlarge/pngtree-garden-watering-can-transparent-background-png-image_13629444.png', true, 'shrubs', () => {
+        garden.style.backgroundImage = `url(${grassImg})`;
+        garden.style.backgroundSize = '100px 100px';
+        garden.style.backgroundRepeat = 'repeat';
+      });
+    });
+    document.querySelectorAll('#step3 .options button').forEach(btn => btn.onclick = () => {
+      selections.shrub = btn.dataset.value;
+      document.querySelectorAll('.shrub-item').forEach(el => el.remove());
+      handleStep('shrub', 'https://png.pngtree.com/png-vector/20240827/ourlarge/pngtree-garden-watering-can-transparent-background-png-image_13629444.png', true, 'trees', () => {
+        // two fixed shrubs
+        const positions = [{left:'5%', bottom:'10%'}, {left:'5%', top:'10%'}];
+        positions.forEach(pos => {
+          const s = document.createElement('img'); s.src = shrubImgs[selections.shrub]; s.className = 'shrub-item';
+          Object.assign(s.style, pos);
+          garden.appendChild(s);
+        });
+      });
+    });
+    document.querySelectorAll('#step4 .options button').forEach(btn => btn.onclick = () => {
+      selections.tree = btn.dataset.value;
+      document.querySelectorAll('.tree-item').forEach(el => el.remove());
+      handleStep('tree', 'https://png.pngtree.com/png-vector/20240827/ourlarge/pngtree-garden-watering-can-transparent-background-png-image_13629444.png', true, '', () => {
+        const t = document.createElement('img'); t.src = treeImgs[selections.tree]; t.className = 'tree-item';
+        t.style.right = '10px'; t.style.bottom = '-20px';
+        garden.appendChild(t);
+      });
+    });
+
+    // Surprise logic with congrats, confetti, then show cards
+    document.getElementById('surprise-btn').onclick = () => {
+      showDialog(congratsDialog, '🎉 Congratulations—you saved an animal! 🎉', () => {
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        confettiSound.play();
+        setTimeout(showAnimals, 2000);
+      });
+    };
+
+    function showAnimals() {
+      garden.innerHTML = '';
+      const matches = species.filter(s =>
+        Object.keys(selections).every(k => s.habitat[k] === selections[k])
+      );
+      if (matches.length) {
+        matches.forEach((s, i) => {
+          const card = document.createElement('div'); card.className = 'animal-card';
+          card.style.top = `calc(50% - 200px + ${i * 350}px)`;
+          card.style.left = 'calc(50% - 150px)';
+          card.innerHTML = `<img src="${s.img}"><h4>${s.name}</h4><small>${s.facts[0]}</small><button>Learn more!</button>`;
+          garden.appendChild(card);
+          card.querySelector('button').onclick = () => {
+            modalImg.src = s.img;
+            modalName.textContent = s.name;
+            modalDetail.innerHTML = `Habitat: Soil(${s.habitat.soil}), Grass(${s.habitat.grass}), Shrub(${s.habitat.shrub}), Tree(${s.habitat.tree})<br>${s.facts.join('<br>')}`;
+            speciesModal.classList.add('show');
+          };
+        });
+      } else {
+        let best = {diff:5,spec:null};
+        species.forEach(s => {
+          const d = Object.keys(selections).reduce((a,k) => a + (s.habitat[k] !== selections[k]), 0);
+          if (d < best.diff) best = {diff:d,spec:s};
+        });
+        const comp = Object.keys(selections).find(k => best.spec.habitat[k] !== selections[k]);
+        suggestionText.textContent = `Swap ${comp} to "${best.spec.habitat[comp]}"?`;
+        suggestionModal.classList.add('show');
+        suggestConfirm.onclick = () => { suggestionModal.classList.remove('show'); selections[comp] = best.spec.habitat[comp]; document.getElementById('surprise-btn').click(); };
+        suggestCancel.onclick = () => suggestionModal.classList.remove('show');
+      }
+    }
+    
+    function closeSpeciesModal(){ speciesModal.classList.remove('show'); }
+
+    const confetti = confettiCanvas && window.confetti.create(confettiCanvas, { resize: true });
+  </script>
+</body>
+</html>
