@@ -159,6 +159,7 @@
       }
     },
     mounted() {
+        console.log('🌱 Gamification mounted', this.$refs.garden)
       // 初始化confetti
       if (window.confetti && this.$refs.confettiCanvas) {
         this.confetti = window.confetti.create(this.$refs.confettiCanvas, { resize: true });
