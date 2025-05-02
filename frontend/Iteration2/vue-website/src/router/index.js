@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import PetOwner from '../views/PetOwner.vue'
 import Learn from '../views/Learn.vue'
-import Gamification from '@/components/Gamification.vue'
 
 const routes = [
   {
@@ -46,7 +45,11 @@ const routes = [
     name: 'Volunteer',
     component: () => import('../views/Volunteer.vue')
   },
-  { path: '/game', name: 'game', component: Gamification },
+  {
+    path: '/gamification',
+    name: 'Game',
+    component: () => import('../views/Gamification.vue')
+  }
 ]
 
 const router = createRouter({
