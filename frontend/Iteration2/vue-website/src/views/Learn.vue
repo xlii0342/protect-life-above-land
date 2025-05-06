@@ -22,7 +22,7 @@
         <div class="card">
           <h3>📊 Key Data and Research</h3>
           <p>According to recent research, a single feral cat can kill up to 740 native animals per year. In some areas of Victoria, feral cat density reaches 5-10 cats per square kilometer.</p>
-          <p>Our research team monitors feral cat activity through radio tracking and camera traps, discovering they particularly prefer forest edges and shrubland areas, which are often habitats for many endangered species.</p>
+          <p>Feral cat activity is monitored through radio tracking and camera traps, discovering they particularly prefer forest edges and shrubland areas, which are often habitats for many endangered species.</p>
         </div>
       </div>
 

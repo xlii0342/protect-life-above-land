@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    &copy; 2025 Wildlife Watch – Supporting SDG 15 | Powered by Logic Loop (TA22)
+    &copy; 2025 Pawsitive – Supporting SDG 15 | Powered by Logic Loop (TA22)
   </footer>
 </template>
 
