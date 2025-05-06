@@ -1,11 +1,12 @@
 {
-  "dependencies": {
-    "leaflet-control-geocoder": "^3.1.0",
-    "ol": "^10.5.0",
-    "ol-geocoder": "^4.3.3"
+  "name": "protect-life-above-land-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
   },
   "scripts": {
-    "build": "vue-cli-service build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "cd frontend/Iteration2 && npm install && npm run build"
   }
 }
