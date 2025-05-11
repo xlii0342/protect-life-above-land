@@ -15,6 +15,7 @@ ALLOWED_HOSTS = os.environ.get(
     'localhost,127.0.0.1,iteration1.pawsitive2.win,iteration2.pawsitive2.win'
 ).split(',')
 
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
