@@ -220,6 +220,8 @@
 <script>
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
+import emailjs from 'emailjs-com';
+
 
 export default {
   name: "Volunteer",
@@ -243,6 +245,10 @@ export default {
       submitMessage: "",
     };
   },
+  created() {
+    // 初始化 EmailJS，替换为你的 User ID
+    emailjs.init('Zt0XmmEON9ohWldYP');
+  },
   methods: {
     async submitApplication() {
       this.submitting = true;
@@ -251,6 +257,20 @@ export default {
 
       try {
         const response = await axios.post("/api/volunteer/", this.form);
+        // 后端保存成功后，通过 EmailJS 发送确认邮件给志愿者
+        await emailjs.send(
+          'protect_life_above_land',       // 替换为你的 Service ID
+          'template_hultgwl',      // 替换为你的 Template ID
+          {
+            to_name: this.form.name,
+            to_email: this.form.email,
+            to_phone: this.form.phone,
+            to_location: this.form.location,
+            to_interests: this.form.interests.join(', '),
+            to_availability: this.form.availability,
+            volunteer_time: new Date().toLocaleString(),
+          }
+        );
         this.submitStatus = "success";
         this.submitMessage =
           "Application submitted successfully! Check your email and phone for confirmation.";
