@@ -220,8 +220,7 @@
 <script>
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
-import emailjs from 'emailjs-com';
-
+import emailjs from "emailjs-com";
 
 export default {
   name: "Volunteer",
@@ -230,6 +229,9 @@ export default {
   },
   data() {
     return {
+      submitting: false,
+      submitStatus: null,
+      submitMessage: "",
       form: {
         name: "",
         email: "",
@@ -240,14 +242,11 @@ export default {
         availability: "",
         motivation: "",
       },
-      submitting: false,
-      submitStatus: null,
-      submitMessage: "",
     };
   },
   created() {
     // 初始化 EmailJS，替换为你的 User ID
-    emailjs.init('Zt0XmmEON9ohWldYP');
+    emailjs.init("Zt0XmmEON9ohWIdYP");
   },
   methods: {
     async submitApplication() {
@@ -256,21 +255,22 @@ export default {
       this.submitMessage = "";
 
       try {
-        const response = await axios.post("/api/volunteer/", this.form);
+        await axios.post("/api/volunteer/", this.form);
         // 后端保存成功后，通过 EmailJS 发送确认邮件给志愿者
         await emailjs.send(
-          'protect_life_above_land',       // 替换为你的 Service ID
-          'template_hultgwl',      // 替换为你的 Template ID
+          "protect_life_above_land", // 替换为你的 Service ID
+          "template_hultgwl", // 替换为你的 Template ID
           {
             to_name: this.form.name,
             to_email: this.form.email,
             to_phone: this.form.phone,
             to_location: this.form.location,
-            to_interests: this.form.interests.join(', '),
+            to_interests: this.form.interests.join(", "),
             to_availability: this.form.availability,
             volunteer_time: new Date().toLocaleString(),
           }
         );
+        console.log("✅ EmailJS send success:", result.status, result.text);
         this.submitStatus = "success";
         this.submitMessage =
           "Application submitted successfully! Check your email and phone for confirmation.";
@@ -287,10 +287,11 @@ export default {
           motivation: "",
         };
       } catch (error) {
+        console.error("❌ Error in submitApplication:", error);
         this.submitStatus = "error";
         this.submitMessage =
           error.response?.data?.message ||
-          "Failed to submit application. Please try again.";
+          "FFailed to submit application or send confirmation email. Please try again.";
       } finally {
         this.submitting = false;
       }
