@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 raw_hosts = os.environ.get(
     'ALLOWED_HOSTS',
-    'localhost,127.0.0.1,iteration1.pawsitive2.win,iteration2.pawsitive2.win'
+    'localhost,127.0.0.1,iteration1.pawsitive2.win,iteration2.pawsitive2.win,protect-life-above-land-f6adc0bf7c39.herokuapp.com'
 )
 # 把每个分段前后空白都剔除，再过滤掉空串
 ALLOWED_HOSTS = [host.strip() for host in raw_hosts.split(',') if host.strip()]
