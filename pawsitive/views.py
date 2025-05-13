@@ -113,30 +113,23 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def submit_volunteer_application(request):
-    # 只接受 POST
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
 
     try:
-        # 手动把原生 request.body 解析成 dict
         payload = json.loads(request.body)
-
-        # 用 DRF 序列化器验证并保存
         serializer = VolunteerApplicationSerializer(data=payload)
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
 
-        # 返回前端成功提示
         return JsonResponse({
             'status': 'success',
             'message': 'Application submitted successfully!'
         }, status=201)
 
     except Exception as e:
-        # 打日志，Heroku 上能在 logs 里看到 traceback
         logger.exception("submit_volunteer_application failed")
         return JsonResponse({
             'status': 'error',
             'message': str(e)
         }, status=500)
-        )
