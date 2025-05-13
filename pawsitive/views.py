@@ -14,7 +14,7 @@ from .models import Pet, AdoptionApplication, VolunteerApplication
 from .serializers import PetSerializer, AdoptionApplicationSerializer, VolunteerApplicationSerializer
 
 import os
-
+import json
 import logging
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
