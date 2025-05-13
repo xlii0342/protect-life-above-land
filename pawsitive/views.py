@@ -111,26 +111,22 @@ class AdoptionApplicationViewSet(viewsets.ModelViewSet):
         return Response({'status': 'success'})
 logger = logging.getLogger(__name__)
 
-@csrf_exempt
+@api_view(['POST'])
 def submit_volunteer_application(request):
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
-
     try:
-        # 反序列化并保存申请
         serializer = VolunteerApplicationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
 
-        # 直接返回成功，邮件逻辑交给前端 EmailJS
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Application submitted successfully! Please check your email for confirmation.'
-        }, status=status.HTTP_201_CREATED)
+        # 这里省略邮件逻辑，或用前端 EmailJS
 
+        return Response(
+            {'status': 'success', 'message': 'Application submitted successfully!'},
+            status=status.HTTP_201_CREATED
+        )
     except Exception as e:
         logger.exception("submit_volunteer_application failed")
-        return JsonResponse({
-            'status': 'error',
-            'message': 'There was an error processing your application. Please try again later.'
-        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(
+            {'status': 'error', 'message': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
