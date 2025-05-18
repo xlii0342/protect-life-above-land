@@ -10,17 +10,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-raw_hosts = os.environ.get(
-    'ALLOWED_HOSTS',
-    'protect-life-above-land-f6adc0bf7c39.herokuapp.com,'
-    'protectlifeaboveland-f57556e18d39.herokuapp.com,'  
-    'iteration1.pawsitive2.win,'                         
-    'iteration2.pawsitive2.win,'                         
-    'localhost,'                                         
-    '127.0.0.1'                                          
-)
+ALLOWED_HOSTS = [
+    'protect-life-above-land-f6adc0bf7c39.herokuapp.com',
+    'protectlifeaboveland-f57556e18d39.herokuapp.com',
+    'iteration1.pawsitive2.win',
+    'iteration2.pawsitive2.win',
+    'localhost',
+    '127.0.0.1',
+]
 # ALLOWED_HOSTS = [h.strip() for h in raw_hosts.split(',') if h.strip()]
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
