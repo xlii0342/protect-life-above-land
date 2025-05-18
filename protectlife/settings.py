@@ -15,6 +15,7 @@ ALLOWED_HOSTS = [
     'protectlifeaboveland-f57556e18d39.herokuapp.com',
     'iteration1.pawsitive2.win',
     'iteration2.pawsitive2.win',
+    'iteration3.pawsitive2.win',
     'localhost',
     '127.0.0.1',
 ]
