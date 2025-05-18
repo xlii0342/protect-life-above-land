@@ -13,6 +13,7 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 raw_hosts = os.environ.get(
     'ALLOWED_HOSTS',
     'protect-life-above-land-f6adc0bf7c39.herokuapp.com,'
+    'protectlifeaboveland-f57556e18d39.herokuapp.com'
     'iteration1.pawsitive2.win,'
     'iteration2.pawsitive2.win'
     'localhost,'
