@@ -15,6 +15,8 @@ raw_hosts = os.environ.get(
     'protect-life-above-land-f6adc0bf7c39.herokuapp.com,'
     'iteration1.pawsitive2.win,'
     'iteration2.pawsitive2.win'
+    'localhost,'
+    '127.0.0.1'
 )
 ALLOWED_HOSTS = [h.strip() for h in raw_hosts.split(',') if h.strip()]
 
