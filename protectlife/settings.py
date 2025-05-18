@@ -19,7 +19,8 @@ raw_hosts = os.environ.get(
     'localhost,'                                         
     '127.0.0.1'                                          
 )
-ALLOWED_HOSTS = [h.strip() for h in raw_hosts.split(',') if h.strip()]
+# ALLOWED_HOSTS = [h.strip() for h in raw_hosts.split(',') if h.strip()]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
