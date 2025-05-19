@@ -188,6 +188,13 @@
             </button>
           </div>
         </form>
+          <!-- 成功或错误提示 -->
+        <div v-if="submitStatus === 'success'" class="success-message">
+          {{ submitMessage }}
+        </div>
+        <div v-else-if="submitStatus === 'error'" class="error-message">
+          {{ submitMessage }}
+        </div>
       </div>
 
       <div class="testimonials">
@@ -250,14 +257,18 @@ export default {
   },
   methods: {
     async submitApplication() {
+      console.log('▶️ submitApplication start', this.form);
       this.submitting = true;
       this.submitStatus = null;
       this.submitMessage = "";
 
       try {
-        await axios.post("/api/volunteer/", this.form);
-        // 后端保存成功后，通过 EmailJS 发送确认邮件给志愿者
-        await emailjs.send(
+        console.log('📤 about to POST to /api/volunteer/');
+        const postResponse = await axios.post("/api/volunteer/", this.form);
+        console.log('✅ POST response:', postResponse);
+
+        console.log('📧 about to send email via EmailJS');
+        const result = await emailjs.send(
           "protect_life_above_land", // 替换为你的 Service ID
           "template_hultgwl", // 替换为你的 Template ID
           {
@@ -270,7 +281,7 @@ export default {
             volunteer_time: new Date().toLocaleString(),
           }
         );
-        console.log("✅ EmailJS send success:", result.status, result.text);
+        console.log('✅ EmailJS result:', result);
         this.submitStatus = "success";
         this.submitMessage =
           "Application submitted successfully! Check your email and phone for confirmation.";
@@ -286,6 +297,7 @@ export default {
           availability: "",
           motivation: "",
         };
+        console.log('🧹 form reset');
       } catch (error) {
         console.error("❌ Error in submitApplication:", error);
         this.submitStatus = "error";
@@ -293,6 +305,7 @@ export default {
           error.response?.data?.message ||
           "FFailed to submit application or send confirmation email. Please try again.";
       } finally {
+        console.log('🔚 submitApplication done');
         this.submitting = false;
       }
     },
