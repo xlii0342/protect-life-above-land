@@ -11,11 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
-    'protect-life-above-land-f6adc0bf7c39.herokuapp.com',
-    'protectlifeaboveland-f57556e18d39.herokuapp.com',
-    'iteration1.pawsitive2.win',
-    'iteration2.pawsitive2.win',
-    'iteration3.pawsitive2.win',
+    'pawsitive-test-c04d0970c471.herokuapp.com',
     'localhost',
     '127.0.0.1',
 ]
