@@ -18,7 +18,7 @@
         <router-link to="/report" @click="closeMenu">Report</router-link>
         <router-link to="/volunteer" @click="closeMenu">Volunteer</router-link>
         <router-link to="/gamification" @click="closeMenu"
-          >Garden Game</router-link
+          >The Ultimate Game Gala</router-link
         >
       </div>
       <div class="overlay" v-if="isMenuOpen" @click="closeMenu"></div>
