@@ -65,6 +65,17 @@ class VolunteerApplication(models.Model):
     name = models.CharField('Name', max_length=100)
     email = models.EmailField('Email')
     phone = models.CharField('Phone Number', max_length=20)
+    location  = models.CharField(
+        'Location',
+        max_length=100,
+        default='',    
+        blank=True
+    )
+    interests = models.JSONField(
+        'Interests',
+        default=list,   
+        blank=True
+    )
     experience = models.TextField('Experience')
     availability = models.TextField('Availability')
     motivation = models.TextField('Motivation')
