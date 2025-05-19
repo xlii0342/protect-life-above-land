@@ -82,19 +82,19 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" v-model="form.name" required />
+              <input type="text" id="name" v-model="form.name" required aria-label="Name" />
             </div>
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" v-model="form.email" required />
+              <input type="email" id="email" v-model="form.email" required aria-label="Email" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" v-model="form.phone" required />
+              <input type="tel" id="phone" v-model="form.phone" required aria-label="Phone Number" />
             </div>
 
             <div class="form-group">
@@ -105,6 +105,7 @@
                 v-model="form.location"
                 placeholder="E.g., Melbourne, Geelong, etc."
                 required
+                aria-label="Location"
               />
             </div>
           </div>
@@ -158,12 +159,13 @@
               v-model="form.experience"
               rows="3"
               placeholder="Please describe your relevant experience, skills or expertise"
+              aria-label="Experience"
             ></textarea>
           </div>
 
           <div class="form-group">
             <label for="availability">Availability</label>
-            <select id="availability" v-model="form.availability" required>
+            <select id="availability" v-model="form.availability" required aria-label="Availability">
               <option value="">Please Select</option>
               <option value="weekdays">Weekdays</option>
               <option value="weekends">Weekends</option>
@@ -179,16 +181,17 @@
               v-model="form.motivation"
               rows="3"
               placeholder="Why are you interested in becoming a volunteer?"
+              aria-label="Motivation"
             ></textarea>
           </div>
 
           <div class="form-group">
-            <button type="submit" class="submit-btn" :disabled="submitting">
+            <button type="submit" class="submit-btn" :disabled="submitting" aria-label="Submit Application">
               {{ submitting ? "Submitting..." : "Submit Application" }}
             </button>
           </div>
         </form>
-          <!-- 成功或错误提示 -->
+        <!-- Success or Error Messages -->
         <div v-if="submitStatus === 'success'" class="success-message">
           {{ submitMessage }}
         </div>
@@ -249,16 +252,37 @@ export default {
       },
     };
   },
-  created() {
-    emailjs.init("Zt0XmmEON9ohWIdYP");
-  },
   methods: {
+    validateForm() {
+      if (!this.form.name || !this.form.email || !this.form.phone || !this.form.location) {
+        this.submitStatus = "error";
+        this.submitMessage = "All required fields must be filled out.";
+        return false;
+      }
+      if (this.form.interests.length === 0) {
+        this.submitStatus = "error";
+        this.submitMessage = "Please select at least one volunteer opportunity.";
+        return false;
+      }
+      return true;
+    },
     async submitApplication() {
       this.submitting = true;
       this.submitStatus = null;
       this.submitMessage = "";
+
+      if (!this.validateForm()) {
+        this.submitting = false;
+        return;
+      }
+
       try {
+        emailjs.init("Zt0XmmEON9ohWIdYP");
+
+        // Send data to the backend
         await axios.post("/api/volunteer/", this.form);
+
+        // Send confirmation email
         await emailjs.send(
           "protect_life_above_land",
           "template_hultgwl",
@@ -272,12 +296,10 @@ export default {
             volunteer_time: new Date().toLocaleString(),
           }
         );
-      } catch (error) {
-        // ignore errors, always mark as success
-      } finally {
-        this.submitting = false;
+
         this.submitStatus = "success";
-        this.submitMessage = "Your application has been submitted successfully!";
+        this.submitMessage =
+          "Your application has been submitted successfully!";
         this.form = {
           name: "",
           email: "",
@@ -288,6 +310,18 @@ export default {
           availability: "",
           motivation: "",
         };
+
+        setTimeout(() => {
+          this.submitStatus = null;
+          this.submitMessage = "";
+        }, 5000);
+      } catch (error) {
+        this.submitStatus = "error";
+        this.submitMessage =
+          error.response?.data?.message ||
+          "Failed to submit your application. Please try again later.";
+      } finally {
+        this.submitting = false;
       }
     },
   },
@@ -465,7 +499,26 @@ h2 {
 .submit-btn:disabled {
   background-color: #8bc48e;
   cursor: not-allowed;
+  opacity: 0.7;
   transform: none;
+}
+
+.success-message {
+  color: #28a745;
+  background-color: #d4edda;
+  padding: 1rem;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  padding: 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-top: 1rem;
 }
 
 .testimonials {
@@ -494,16 +547,6 @@ h2 {
 .testimonial .author {
   font-weight: 600;
   color: #4caf50;
-}
-
-.success-message {
-  color: green;
-  margin-top: 1rem;
-}
-
-.error-message {
-  color: red;
-  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
