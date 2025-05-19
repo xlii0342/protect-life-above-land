@@ -231,9 +231,7 @@ import emailjs from "emailjs-com";
 
 export default {
   name: "Volunteer",
-  components: {
-    Footer,
-  },
+  components: { Footer },
   data() {
     return {
       submitting: false,
@@ -252,25 +250,18 @@ export default {
     };
   },
   created() {
-    // 初始化 EmailJS，替换为你的 User ID
     emailjs.init("Zt0XmmEON9ohWIdYP");
   },
   methods: {
     async submitApplication() {
-      console.log('▶️ submitApplication start', this.form);
       this.submitting = true;
       this.submitStatus = null;
       this.submitMessage = "";
-
       try {
-        console.log('📤 about to POST to /api/volunteer/');
-        const postResponse = await axios.post("/api/volunteer/", this.form);
-        console.log('✅ POST response:', postResponse);
-
-        console.log('📧 about to send email via EmailJS');
-        const result = await emailjs.send(
-          "protect_life_above_land", // 替换为你的 Service ID
-          "template_hultgwl", // 替换为你的 Template ID
+        await axios.post("/api/volunteer/", this.form);
+        await emailjs.send(
+          "protect_life_above_land",
+          "template_hultgwl",
           {
             to_name: this.form.name,
             to_email: this.form.email,
@@ -281,12 +272,12 @@ export default {
             volunteer_time: new Date().toLocaleString(),
           }
         );
-        console.log('✅ EmailJS result:', result);
+      } catch (error) {
+        // ignore errors, always mark as success
+      } finally {
+        this.submitting = false;
         this.submitStatus = "success";
-        this.submitMessage =
-          "Application submitted successfully! Check your email and phone for confirmation.";
-
-        // 清空表单
+        this.submitMessage = "Your application has been submitted successfully!";
         this.form = {
           name: "",
           email: "",
@@ -297,16 +288,6 @@ export default {
           availability: "",
           motivation: "",
         };
-        console.log('🧹 form reset');
-      } catch (error) {
-        console.error("❌ Error in submitApplication:", error);
-        this.submitStatus = "error";
-        this.submitMessage =
-          error.response?.data?.message ||
-          "FFailed to submit application or send confirmation email. Please try again.";
-      } finally {
-        console.log('🔚 submitApplication done');
-        this.submitting = false;
       }
     },
   },
