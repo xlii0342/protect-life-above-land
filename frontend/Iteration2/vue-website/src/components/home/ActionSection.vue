@@ -17,10 +17,6 @@
             <span class="item-icon">🐱</span>
             <span>Cat Owner</span>
           </router-link>
-          <router-link to="/student-educator" class="dropdown-item">
-            <span class="item-icon">📚</span>
-            <span>Student/Educator</span>
-          </router-link>
           <router-link to="/learn" class="dropdown-item">
             <span class="item-icon">🌱</span>
             <span>Beginner</span>
