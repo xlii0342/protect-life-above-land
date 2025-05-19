@@ -5,8 +5,6 @@
       allowtransparency="true"
       allow="fullscreen"
       allowfullscreen
-      width="485"
-      height="402"
       frameborder="0"
       scrolling="no"
     ></iframe>
@@ -20,19 +18,20 @@
 <style scoped>
 .scratch-fullscreen {
   position: fixed;
-  top: 0;
+  top: 64px;                      
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64px);     
   overflow: hidden;
+  z-index: 0;                      
 }
 
 .scratch-fullscreen iframe {
   position: absolute;
-  top: -40px;
+  top: -40px;                     
   left: 0;
   width: 100vw;
-  height: calc(100vh + 40px);
+  height: calc(100vh - 64px + 40px);
   border: none;
 }
 </style>
