@@ -61,20 +61,26 @@ class VolunteerApplication(models.Model):
         ('APPROVED', 'Approved'),
         ('REJECTED', 'Rejected'),
     ]
-    
+
     name = models.CharField('Name', max_length=100)
     email = models.EmailField('Email')
     phone = models.CharField('Phone Number', max_length=20)
     experience = models.TextField('Experience')
     availability = models.TextField('Availability')
     motivation = models.TextField('Motivation')
-    status = models.CharField('Status', max_length=20, choices=STATUS_CHOICES, default='PENDING')
+    status = models.CharField(
+        'Status',
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='PENDING'
+    )
     created_at = models.DateTimeField('Created At', auto_now_add=True)
     updated_at = models.DateTimeField('Updated At', auto_now=True)
 
     class Meta:
         verbose_name = 'Volunteer Application'
         verbose_name_plural = 'Volunteer Applications'
+        ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.name} - {self.created_at.strftime('%Y-%m-%d')}"
+        return f"{self.name} ({self.get_status_display()})"
