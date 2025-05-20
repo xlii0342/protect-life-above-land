@@ -24,14 +24,7 @@
         </div>
       </div>
       
-      <!-- Report 按钮 -->
-      <router-link to="/report" class="action-card">
-        <button class="main-button report-btn">
-          <span class="btn-icon">📝</span>
-          <span class="btn-text">Report</span>
-          <div class="btn-decoration"></div>
-        </button>
-      </router-link>
+      
       
       <!-- Volunteer 按钮 -->
       <router-link to="/volunteer" class="action-card">

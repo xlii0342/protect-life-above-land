@@ -15,7 +15,6 @@
         <router-link to="/" @click="closeMenu">Home</router-link>
         <router-link to="/learn" @click="closeMenu">Learn</router-link>
         <router-link to="/map" @click="closeMenu">Map</router-link>
-        <router-link to="/report" @click="closeMenu">Report</router-link>
         <router-link to="/volunteer" @click="closeMenu">Volunteer</router-link>
         <router-link to="/gamification" @click="closeMenu"
           >The Ultimate Game Gala</router-link
