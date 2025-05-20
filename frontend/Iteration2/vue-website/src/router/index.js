@@ -37,7 +37,7 @@ const routes = [
   },
   {
     path: '/gamification',
-    name: 'The Ultimate Game Gala',
+    name: 'Early childhood games',
     component: () => import('../views/Gamification.vue')
   }
 ]
