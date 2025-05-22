@@ -16,7 +16,7 @@ ALLOWED_HOSTS = [
     'iteration1.pawsitive2.win',
     'iteration2.pawsitive2.win',
     'iteration3.pawsitive2.win',
-    'pawsitive2.win',
+    'iterationfinal.pawsitive2.win',
     'localhost',
     '127.0.0.1',
 ]
