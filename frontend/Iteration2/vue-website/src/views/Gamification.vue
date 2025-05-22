@@ -23,7 +23,7 @@
     <!-- 中间游戏框架 -->
     <div class="scratch-fullscreen">
       <iframe
-        src="https://scratch.mit.edu/projects/1176956189/embed"
+        src="https://scratch.mit.edu/projects/1177756859/embed"
         allowtransparency="true"
         allow="fullscreen"
         allowfullscreen
