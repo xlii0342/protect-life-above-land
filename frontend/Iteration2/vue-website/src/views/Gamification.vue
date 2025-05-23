@@ -2,22 +2,20 @@
   <div class="gamification-container">
     <!-- 左侧游戏背景描述 -->
     <div class="game-info-box left-info">
-      <h3>🌏 What's This Game About?</h3>
-      <p>Some animals are in danger — their homes are disappearing!</p>
-      <p>In this game, you'll learn where these animals live.</p>
+      <h3>🌏 Let's Play!</h3>
+      <p>Animals need our help! Their homes are disappearing!</p>
       
       <div class="feature-section">
-        <h4>🎵 Cool Features</h4>
-        <p>Hear real animal sounds and see how they move!</p>
-        <p>Each one has special actions you can watch.</p>
+        <h4>🎵 Fun Stuff</h4>
+        <p>Hear animal sounds and watch them move!</p>
       </div>
       
       <div class="why-matters">
-        <h4>🧡 Why It Matters</h4>
-        <p>You'll discover how you can help protect these animals and their homes.</p>
+        <h4>🧡 Help Them</h4>
+        <p>Learn how to protect these amazing animals!</p>
       </div>
       
-      <p class="hero-message">Be a hero — every little action counts! 🐸🦜</p>
+      <p class="hero-message">You can be a hero! 🐸🦜</p>
     </div>
     
     <!-- 中间游戏框架 -->
@@ -34,34 +32,34 @@
     
     <!-- 右侧游戏提示 -->
     <div class="game-info-box right-info">
-      <h3>🌟 Game Tips!</h3>
-      <p>Look for glowing things — they are clickable!</p>
-      <p>Each habitat has a secret action to save an animal.</p>
+      <h3>🌟 How to Play</h3>
+      <p>Glowing things can be clicked!</p>
+      <p>Find ways to save each animal!</p>
       
       <div class="animal-info">
         <div class="animal-item">
-          <h5>The Growling Grass Frog</h5>
-          <p>Can breathe through its skin!</p>
+          <h5>Growling Grass Frog</h5>
+          <p>Breathes through skin!</p>
         </div>
         
         <div class="animal-item">
           <h5>Spot-tailed Quoll</h5>
-          <p>"They're expert tree climbers — and very shy."</p>
+          <p>Amazing tree climber!</p>
         </div>
         
         <div class="animal-item">
           <h5>Orange-bellied Parrot</h5>
-          <p>"One of the rarest parrots in the world!"</p>
+          <p>Super rare bird!</p>
         </div>
         
         <div class="animal-item">
           <h5>Malleefowl</h5>
-          <p>"Builds giant nests from leaves and dirt!"</p>
+          <p>Builds huge nests!</p>
         </div>
       </div>
       
       <div class="join-rangers">
-        <h4>Be the Hero! Help the animals!</h4>
+        <h4>Help the animals!</h4>
       </div>
     </div>
   </div>
@@ -80,29 +78,43 @@
   width: 100vw;
   height: calc(100vh - 64px);
   overflow: hidden;
+  font-family: 'Comic Sans MS', 'Bubblegum Sans', 'Nunito', 'Varela Round', sans-serif;
 }
 
 .game-info-box {
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   max-width: 250px;
   overflow-y: auto;
   z-index: 10;
   margin: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
 }
 
 .game-info-box h3 {
   color: #2a7d2a;
   margin-top: 0;
-  border-bottom: 2px solid #8bc34a;
+  border-bottom: 3px solid #8bc34a;
   padding-bottom: 8px;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 700;
 }
 
 .game-info-box h4 {
   color: #33691e;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.game-info-box p {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
 }
 
 .left-info {
@@ -115,66 +127,69 @@
 
 /* 新增样式 */
 .feature-section, .why-matters {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 8px;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 14px;
 }
 
 .feature-section {
-  background-color: rgba(139, 195, 74, 0.1);
-  border-left: 3px solid #8bc34a;
+  background-color: rgba(139, 195, 74, 0.15);
+  border-left: 4px solid #8bc34a;
 }
 
 .why-matters {
-  background-color: rgba(255, 152, 0, 0.1);
-  border-left: 3px solid #ff9800;
+  background-color: rgba(255, 152, 0, 0.15);
+  border-left: 4px solid #ff9800;
 }
 
 .hero-message {
   margin-top: 20px;
-  padding: 12px;
-  background-color: rgba(76, 175, 80, 0.15);
-  border-radius: 8px;
+  padding: 14px;
+  background-color: rgba(76, 175, 80, 0.18);
+  border-radius: 14px;
   text-align: center;
   font-weight: bold;
   color: #2e7d32;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .animal-info {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .animal-item {
-  margin-bottom: 15px;
-  padding: 10px;
-  background-color: rgba(139, 195, 74, 0.1);
-  border-left: 3px solid #8bc34a;
-  border-radius: 4px;
+  margin-bottom: 14px;
+  padding: 12px;
+  background-color: rgba(139, 195, 74, 0.15);
+  border-left: 4px solid #8bc34a;
+  border-radius: 12px;
 }
 
 .animal-item h5 {
   margin: 0 0 5px 0;
   color: #33691e;
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
 .animal-item p {
   margin: 0;
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .join-rangers {
-  margin-top: 20px;
+  margin-top: 18px;
   padding: 15px;
-  background-color: rgba(255, 193, 7, 0.2);
-  border-radius: 8px;
+  background-color: rgba(255, 193, 7, 0.25);
+  border-radius: 14px;
   text-align: center;
 }
 
 .join-rangers h4 {
   color: #ff6f00;
   margin-top: 0;
+  font-size: 1.3rem;
 }
 
 .scratch-fullscreen {
@@ -200,7 +215,19 @@ ul {
 @media (max-width: 1200px) {
   .game-info-box {
     max-width: 200px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+  
+  .game-info-box h3 {
+    font-size: 1.4rem;
+  }
+  
+  .game-info-box h4 {
+    font-size: 1.2rem;
+  }
+  
+  .animal-item h5 {
+    font-size: 1.1rem;
   }
 }
 
