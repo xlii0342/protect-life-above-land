@@ -1,4 +1,5 @@
 web: gunicorn protectlife.wsgi --log-file -
+release: python manage.py migrate --no-input
 
 
 # Uncomment this `release` process if you are using a database, so that Django's model
